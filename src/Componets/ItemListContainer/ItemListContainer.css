@@ -1,0 +1,17 @@
+.ItemListContainer {
+  margin: auto;
+  width: 80%;
+}
+.ItemListContainer-Title {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 26px;
+  color: #666;
+}
+.ItemListContainer-ItemList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  width: 90%;
+}

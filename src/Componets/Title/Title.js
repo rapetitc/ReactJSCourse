@@ -1,20 +1,13 @@
 import React from "react";
-import logo from "../../Media/logo.png";
+import "./Title.css"
+import logo from "../../Media/Mercado-Libre-Logo.png";
 
-const style = {
-  container: {
-    display: "flex",
-    alignItems: "center",
-  },
-  logo: {
-    height: "70px",
-  },
-};
+
 const Title = () => {
   return (
-    <div style={style.container}>
-      <img style={style.logo} src={logo} alt="Online Store Logo" />
-      <h1>Online Store</h1>
+    <div className="title-Container">
+      <img className="title-Logo" src={logo} alt="Online Store" />
+      <h1 className="title">online store</h1>
     </div>
   );
 };
