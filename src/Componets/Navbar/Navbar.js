@@ -1,10 +1,12 @@
 import React from "react";
 import "./Navbar.css";
-import Title from "../Title/Title";
-import SearchBar from "../SearchBar/SearchBar";
-import ShoppingCart from "../ShoppingCart/ShoppingCart";
-import Menu from "../Menu/Menu";
-import Profile from "../Profile/Profile";
+import Title from "./Title/Title";
+import SearchBar from "./SearchBar/SearchBar";
+import SubscriptionNav from "./SubscriptionNav/SubscriptionNav";
+import MapNav from "./MapNav/MapNav";
+import Menu from "./Menu/Menu";
+import Profile from "./Profile/Profile";
+import ShoppingCart from "./ShoppingCart/ShoppingCart";
 
 const Navbar = ({ UserName = "User" }) => {
   return (
@@ -12,9 +14,13 @@ const Navbar = ({ UserName = "User" }) => {
       <div>
         <Title></Title>
         <SearchBar></SearchBar>
+        <SubscriptionNav></SubscriptionNav>
+        <MapNav></MapNav>
         <Menu></Menu>
-        <Profile UserName={UserName}></Profile>
-        <ShoppingCart></ShoppingCart>
+        <div style={{width:'35%', display:'flex'}}>
+          <Profile UserName={UserName}></Profile>
+          <ShoppingCart></ShoppingCart>
+        </div>
       </div>
     </header>
   );

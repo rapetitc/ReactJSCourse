@@ -9,9 +9,6 @@
   color: #666;
 }
 .ItemListContainer-ItemList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   margin: auto;
   width: 90%;
 }

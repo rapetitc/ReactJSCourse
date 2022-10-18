@@ -2,17 +2,18 @@
   background-color: #fff159;
   display: flex;
   justify-content: center;
-  height: 70px;
+  height: 100px;
   width: 100%;
 }
 .navbar-Container > div {
-    background-color: #fff159;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
-    width: 90%;
-  }
+  background-color: #fff159;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 90%;
+}
 .navbar-NavGroup {
   display: flex;
   justify-content: space-between;
