@@ -1,0 +1,10 @@
+.Categories-Container{
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    margin: 0 auto;
+}
+.Categories-Container > a{
+    color: black;
+    text-decoration: none;
+}

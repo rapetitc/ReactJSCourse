@@ -1,0 +1,69 @@
+.itemList-Container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card {
+  cursor: pointer;
+  border: 1px solid rgba(90, 90, 90, 0.082);
+  border-radius: 5px;
+  margin: 5px;
+  width: 240px;
+  height: 318px;
+}
+
+.card:hover .card-title {
+  transition: 0.3s;
+  font-size: 14px;
+}
+.card-img {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  height: 230px;
+}
+.card-img > a {
+  max-height: 100%;
+  max-width: 100%;
+}
+.card-body {
+  display: block;
+}
+.card-title {
+  margin: 5px;
+  font-size: 22px;
+  height: 30px;
+  overflow: hidden;
+}
+.card-price {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  font-size: 25px;
+  height: 45px;
+}
+.card-price > p {
+  width: 50%;
+}
+.card-price > p:first-child {
+  text-align: center;
+}
+/* .card-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 38px;
+}
+.card-buttons > * {
+  width: 20%;
+  height: 75%;
+}
+.card-buttons > input {
+  text-align: center;
+}
+
+.card-buttons > button {
+  cursor: pointer;
+}
+ */

@@ -1,0 +1,11 @@
+.shoppingCart-Container {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+.shoppingCart {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 20px;
+}

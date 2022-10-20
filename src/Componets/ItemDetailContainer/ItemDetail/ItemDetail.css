@@ -1,0 +1,57 @@
+.ItemDetail {
+  display: flex;
+  padding: 10px 0;
+}
+.ItemDetail > .card-imgs {
+  width: 6%;
+}
+.ItemDetail > .card-imgs > .card-img {
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 5px;
+  height: 50px;
+  width: 50px;
+  margin: 10px auto;
+}
+.ItemDetail > .card-img-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 62%;
+  height: 600px;
+  background-color: white;
+}
+.ItemDetail > .card-img-preview > img {
+  display: block;
+  min-width: 90%;
+  max-width: 100%;
+  max-height: 100%;
+}
+.ItemDetail > .card-body {
+  display: flex;
+  justify-content: center;
+  width: 32%;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 5px;
+}
+.ItemDetail > .card-body > .card-description {
+  margin: 10px 15px;
+}
+.ItemDetail > .card-body > .card-description > .card-availability {
+  height: fit-content;
+  font-size: 14px;
+  color: rgb(148, 141, 141);
+  margin: 10px 0;
+}
+.ItemDetail > .card-body > .card-description > .card-title {
+  height: fit-content;
+  max-height: 90px;
+  font-size: 26px;
+  color: rgb(0, 0, 0);
+  margin: 10px 0;
+}
+.ItemDetail > .card-body > .card-description > .card-price {
+  height: fit-content;
+  font-size: 26px;
+  color: rgb(0, 0, 0);
+  margin: 10px 0;
+}

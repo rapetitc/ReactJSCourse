@@ -10,6 +10,9 @@ import CartView from "./Componets/CartView/CartView";
 import Profile from "./Componets/Profile/Profile";
 import ItemDetailContainer from "./Componets/ItemDetailContainer/ItemDetailContainer";
 import Categories from "./Componets/Categories/Categories";
+import Category from "./Componets/Category/Category";
+
+import NotFoundPage from "./Componets/NotFoundPage/NotFoundPage";
 
 const App = () => {
   return (
@@ -23,10 +26,14 @@ const App = () => {
           <Route path="/about-us" element={<AboutUs></AboutUs>}></Route>
           <Route path="/cart" element={<CartView></CartView>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
-          <Route path="/categories" element={<Categories></Categories>}></Route>
           <Route path="/product" element={<ItemDetailContainer></ItemDetailContainer>}>
             <Route path=":id" element={<ItemDetailContainer></ItemDetailContainer>}></Route>
           </Route>
+          <Route path="/product/categories" element={<Categories></Categories>}></Route>
+          <Route path="/product/category" element={<Category></Category>}>
+            <Route path=":id" element={<Category></Category>}></Route>
+          </Route>
+          <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
         </Routes>
       </BrowserRouter>
     </>

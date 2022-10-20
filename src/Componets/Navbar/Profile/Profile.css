@@ -1,0 +1,17 @@
+.profile-Container {
+  display: flex;
+  width: 300px;
+  height: 50px;
+}
+.profile-Container > div{
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+  min-width: 275px;
+}
+.profile-Link {
+  margin-left: 15px;
+  font-size: 13px;
+  color: #333;
+  text-decoration: none;
+}
