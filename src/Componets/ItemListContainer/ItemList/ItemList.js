@@ -9,8 +9,8 @@ const ItemList = ({ database }) => {
     <div className="itemList-Container">
       {database.map((element, index) => {
         return (
-          <Link to={"/product/" + element.id} key={index}>
-            <div className="card">
+          <div className="card">
+            <Link to={"/product/" + element.id} key={index}>
               <div className="card-img">
                 <img src={element.thumbnail} alt="..." />
               </div>
@@ -21,8 +21,8 @@ const ItemList = ({ database }) => {
                   <p>${element.price}</p>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         );
       })}
     </div>

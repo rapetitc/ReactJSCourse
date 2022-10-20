@@ -26,12 +26,10 @@ const ItemListContainer = () => {
   }, []);
 
   return (
-    <>
-      <div className="ItemListContainer">
-        <h2 className="ItemListContainer-Title">Productos que te puedan interesar, veces cargadas {iterador}</h2>
-        {DB.length > 0 ? <ItemList database={DB}></ItemList> : <h1>Cargando . . .</h1>}
-      </div>
-    </>
+    <div className="ItemListContainer">
+      <h2 className="ItemListContainer-Title">Productos que te puedan interesar</h2>
+      {DB.length > 0 ? <ItemList database={DB}></ItemList> : <h1>Cargando . . .</h1>}
+    </div>
   );
 };
 

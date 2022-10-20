@@ -26,6 +26,7 @@ const Categories = () => {
 
   return (
     <div className="Categories-Container">
+      <h2>Categorias</h2>
       <ul>
         {categories.map((element, index) => {
           return (
