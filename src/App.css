@@ -1,18 +1,17 @@
-* {
-  padding: 0;
-  margin: 0;
-  font-family: sans-serif;
+main {
+  /* background-color: #ebebeb; */
+  width: 100vw;
+  min-height: 100%;
 }
 
-main {
-  background-color: #ebebeb;
-  min-height: 100vh;
-  width: 100vw;
+.fluid-container {
+  width: 100%;
+  min-height: 50px;
 }
 
 .container {
-  display: flex;
   margin: 0 auto;
+  min-height: 50px;
 }
 
 @media (max-width: 576px) {

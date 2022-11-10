@@ -1,46 +1,53 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+/* Components */
+import NavBar from "./Components/Navbar/Navbar";
+import ItemListContainer from "./Pages/ItemListContainer/ItemListContainer";
+import ItemDetailContainer from "./Pages/ItemDetailContainer/ItemDetailContainer";
+import Categories from "./Pages/Categories/Categories";
+import Category from "./Pages/Category/Category";
+import CreateAccount from "./Pages/CreateAccount/CreateAccount";
+import CartView from "./Pages/CartView/CartView";
+import CheckOutView from "./Pages/CheckOutView/CheckOutView";
+import Session from "./Pages/Session/Session";
+import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
+/* Context */
+import { CartCounterProvider } from "./Context/CartCounter";
+import { AuthenticatorProvider } from "./Context/Authenticator";
 
-import Navbar from "./Componets/Navbar/Navbar";
-import ItemListContainer from "./Componets/ItemListContainer/ItemListContainer";
-import Store from "./Componets/Store/Store";
-import Contact from "./Componets/Contact/Contact";
-import AboutUs from "./Componets/AboutUs/AboutUs";
-import CartView from "./Componets/CartView/CartView";
-import Profile from "./Componets/Profile/Profile";
-import ItemDetailContainer from "./Componets/ItemDetailContainer/ItemDetailContainer";
-import Categories from "./Componets/Categories/Categories";
-import Category from "./Componets/Category/Category";
-
-import NotFoundPage from "./Componets/NotFoundPage/NotFoundPage";
-
-const App = () => {
+function App() {
   return (
-    <main>
-      <BrowserRouter>
-        <Navbar UserName="Ruben Petit"></Navbar>
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<ItemListContainer></ItemListContainer>}></Route>
-            <Route path="/store" element={<Store></Store>}></Route>
-            <Route path="/contact-us" element={<Contact></Contact>}></Route>
-            <Route path="/about-us" element={<AboutUs></AboutUs>}></Route>
-            <Route path="/cart" element={<CartView></CartView>}></Route>
-            <Route path="/profile" element={<Profile></Profile>}></Route>
-            <Route path="/product" element={<ItemDetailContainer></ItemDetailContainer>}>
-              <Route path=":id" element={<ItemDetailContainer></ItemDetailContainer>}></Route>
+    <CartCounterProvider>
+      <AuthenticatorProvider>
+        <NavBar></NavBar>
+        <Routes>
+          <Route path="/" element={<ItemListContainer />}></Route>
+          <Route path="product">
+            <Route path="category">
+              <Route path=":id" element={<Category />}></Route>
             </Route>
-            <Route path="/product/categories" element={<Categories></Categories>}></Route>
-            <Route path="/product/category" element={<Category></Category>}>
-              <Route path=":id" element={<Category></Category>}></Route>
-            </Route>
-            <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </main>
+            <Route path="categories" element={<Categories />}></Route>
+            <Route path=":id" element={<ItemDetailContainer />}></Route>
+          </Route>
+          <Route path="create-account">
+            <Route path="" element={<CreateAccount />}></Route>
+            <Route path="landing" element={<CreateAccount />}></Route>
+            <Route path="requirements" element={<CreateAccount />}></Route>
+            <Route path="email-verification" element={<CreateAccount />}></Route>
+            <Route path="personal-info" element={<CreateAccount />}></Route>
+            <Route path="create-password" element={<CreateAccount />}></Route>
+            <Route path="done" element={<CreateAccount />}></Route>
+          </Route>
+          <Route path="session" element={<Session />}></Route>
+          <Route path="cart">
+            <Route path="" element={<CartView />}></Route>
+            <Route path="checkout" element={<CheckOutView />}></Route>
+          </Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
+        </Routes>
+      </AuthenticatorProvider>
+    </CartCounterProvider>
   );
-};
+}
 
 export default App;
