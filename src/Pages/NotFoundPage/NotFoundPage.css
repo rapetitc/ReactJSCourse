@@ -1,0 +1,23 @@
+.NotFoundPage_Container {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - 100px);
+}
+
+.NotFoundPage_Container > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  /* background-color: red; */
+  width: 50%;
+  width: 50%;
+}
+.NotFoundPage_Container > div > * {
+    margin: 5px;
+  width: 100%;
+  text-align: center;
+}
+.NotFoundPage_Container > div > h2 {
+    font-size: 35px;
+}

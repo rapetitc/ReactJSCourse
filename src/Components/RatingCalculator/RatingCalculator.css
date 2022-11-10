@@ -1,0 +1,11 @@
+.RatingCalculator_Container {
+  display: flex;
+  width: 100%;
+  height: 15px;
+  color: #3483fa;
+  cursor: pointer;
+}
+.RatingCalculator_Container > span {
+  margin-left: 10px;
+  margin-top: -3px;
+}

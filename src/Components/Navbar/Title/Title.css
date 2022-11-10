@@ -1,0 +1,24 @@
+.Title-Container{
+  display: flex;
+  justify-content: flex-end;
+  width: 15%;
+  height: 50px;
+}
+.Title-Container > a{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+.Title-Logo {
+  height: 90%;
+  margin-right: 5px;
+}
+.Title {
+  color: rgb(51, 51, 102);
+  font-size: 20px;
+  width: 80px;
+  white-space: 50px;
+  font-weight: bold;
+  line-height: 70%;
+}

@@ -1,0 +1,9 @@
+.CompactMenu_Container {
+  display: none;
+  justify-content: center;
+}
+.CompactMenu_Container > svg {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}

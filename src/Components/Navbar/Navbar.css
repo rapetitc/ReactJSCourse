@@ -1,0 +1,69 @@
+.NavBar_Container {
+  background-color: #fff159;
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  width: 100%;
+}
+.NavBar_Container > .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .NavBar_Container {
+    height: 90px;
+  }
+  .NavBar_Container > .container > .Title-Container {
+    width: 15%;
+    justify-content: center;
+  }
+  .NavBar_Container > .container > .Title-Container .Title {
+    display: none;
+  }
+  .NavBar_Container > .container > .SearchBar_Container {
+    width: 75%;
+  }
+  .NavBar_Container > .container > .SubscriptionNav_Container {
+    display: none;
+  }
+  .NavBar_Container > .container > .CompactMenu_Container {
+    display: flex;
+    width: 10%;
+  }
+  .NavBar_Container > .container > .MapNav_Container {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid lightgray;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .NavBar_Container > .container > .MapNav_Container > div {
+    justify-content: flex-start;
+    margin-left: 10px;
+    border: none;
+  }
+  .NavBar_Container > .container > .MapNav_Container > div > svg {
+    width: 20px;
+    height: 20px;
+  }
+  .NavBar_Container > .container > .MapNav_Container > div > p {
+    width: auto;
+  }
+  .NavBar_Container > .container > .MapNav_Container > svg {
+    display: block;
+    margin-right: 10px;
+    align-self: center;
+  }
+  .NavBar_Container > .container > .Menu_Container {
+    display: none;
+  }
+  .NavBar_Container > .container > .Profile_Container {
+    display: none;
+  }
+  .NavBar_Container > .container > .ShoppingCart_Container {
+    display: none;
+  }
+}

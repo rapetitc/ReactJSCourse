@@ -1,0 +1,158 @@
+.ItemDetailContainer_Container {
+  background-color: white;
+  padding-top: 20px;
+  min-height: calc(100vh - 100px);
+}
+
+.ItemDetailContainer_Container > div {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.ItemDetailContainer_Container > div > .product-imgs {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 70%;
+}
+/* product-selection-box >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+.ItemDetailContainer_Container > div > .product-imgs > .product-selection-box {
+  padding-top: 10px;
+  width: 80px;
+}
+.ItemDetailContainer_Container > div > .product-imgs > .product-selection-box > .product-img {
+  display: block;
+  margin: 5px auto;
+  width: 60px;
+  height: 60px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.ItemDetailContainer_Container > div > .product-imgs > .product-selection-box > .product-img:hover {
+  box-shadow: 0 0 10px gray;
+}
+/* product-img-preview >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+.ItemDetailContainer_Container > div > .product-imgs > .product-img-preview {
+  background-color: white;
+  width: calc(100% - 80px);
+  height: 500px;
+}
+.ItemDetailContainer_Container > div > .product-imgs > .product-img-preview > img {
+  display: block;
+  margin: 0 auto;
+  min-width: 70%;
+  max-width: 100%;
+  min-height: 70%;
+  max-height: 100%;
+}
+
+/* Col 2 */
+.ItemDetailContainer_Container > div > .card-body {
+  display: flex;
+  justify-content: center;
+  width: calc(30% - 22px);
+  margin: 0 10px;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 5px;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description {
+  margin: 10px 15px;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-availability {
+  height: fit-content;
+  font-size: 14px;
+  color: rgb(148, 141, 141);
+  margin: 10px 0;
+}
+
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-title-container {
+  display: flex;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-title-container > .card-title {
+  height: fit-content;
+  max-height: 75px;
+  font-size: 26px;
+  color: rgb(0, 0, 0);
+  margin: 10px 0;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-title-container > input {
+  display: none;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-title-container > button {
+  margin-top: 10px;
+  height: fit-content;
+  border: 0px;
+  background: none;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-title-container > button > svg {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  color: #3483fa;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-price {
+  height: fit-content;
+  font-size: 40px;
+  color: rgb(0, 0, 0);
+  margin: 10px 0;
+}
+
+/* CartButtons */ /* CartButtons */ /* CartButtons */
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 15px 0;
+  width: 100%;
+  min-width: 300px;
+  max-width: 600px;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-buttons > * {
+  margin: 5px 0;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-buttons > .card-button-control {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-buttons > .card-button-control > button {
+  cursor: pointer;
+  background: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #3483fa;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-buttons > .card-button-control > button:hover {
+  border: 1px solid blue;
+  background-color: #3483fa;
+  color: white;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-buttons > .card-button-control > button > svg {
+  width: 20px;
+  height: 20px;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-buttons > .card-button-control > input {
+  font-size: 20px;
+  text-align: center;
+  width: 250px;
+  margin: 0 5px;
+  height: 38px;
+  outline: none;
+  border: 1px solid lightgray;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-buttons > button {
+  font-size: 20px;
+  cursor: pointer;
+  background: none;
+  width: 90%;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #3483fa;
+}
+.ItemDetailContainer_Container > div > .card-body > .card-description > .card-buttons > button:hover {
+  border: 1px solid blue;
+  background-color: #3483fa;
+  color: white;
+}

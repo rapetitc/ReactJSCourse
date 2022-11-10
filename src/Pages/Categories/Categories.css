@@ -1,0 +1,30 @@
+.Categories_Container {
+  background-color: white;
+  min-height: calc(100vh - 100px);
+}
+.Categories_Container > h2 {
+  width: calc(90% - 90px);
+  padding: 15px 45px;
+  margin: 0 auto;
+  font-size: 26px;
+  color: #666;
+  border-bottom: 1px solid lightgray;
+}
+.Categories_Container > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: calc(100% - 40px);
+  margin: 20px;
+}
+.Categories_Container > ul > li {
+  font-size: 1.2em;
+  margin: 15px 10px;
+  list-style: none;
+}
+.Categories_Container > ul > li > a {
+  text-decoration: none;
+  color: black;
+}
+.Categories_Container > ul > li > a:hover {
+  color: rgb(94, 94, 94);
+}

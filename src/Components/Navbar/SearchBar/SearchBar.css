@@ -1,0 +1,38 @@
+.SearchBar_Container {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+.SearchBar_Container > div {
+  background-color: white;
+  display: flex;
+  height: 30px;
+  max-width: 600px;
+  width: 85%;
+  min-width: 225px;
+  border: 1px solid rgba(155, 155, 155, 0.2);
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+.searchBar-Input {
+  background-color: white;
+  max-width: 570px;
+  width: 100%;
+  min-width: 170px;
+  outline: none;
+  border: 0px;
+}
+.searchBar-Input::placeholder {
+  color: rgba(155, 155, 155, 0.6);
+}
+.searchBar-Button {
+  background-color: white;
+  width: 30px;
+  font-size: 16px;
+  color: #666;
+  outline: none;
+  padding-left: 11px;
+  border: none;
+  border-left: 1px solid rgba(155, 155, 155, 0.3);
+  cursor: pointer;
+}

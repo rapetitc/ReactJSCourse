@@ -1,0 +1,16 @@
+.Category_Container {
+  background-color: white;
+  min-height: calc(100vh - 100px);
+}
+.Category_Container > h2 {
+  width: calc(90% - 90px);
+  margin: 0 auto;
+  padding: 15px 45px;
+  font-size: 26px;
+  color: #666;
+  border-bottom: 1px solid lightgray;
+}
+.Category_Container > div {
+  display: flex;
+  flex-wrap: wrap;
+}

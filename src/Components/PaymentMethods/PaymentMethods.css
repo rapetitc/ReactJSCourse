@@ -1,0 +1,29 @@
+.PaymentMethods_Container {
+  display: flex;
+  flex-wrap: wrap;
+  width: max-content;
+  min-width: 300px;
+  max-width: 300px;
+}
+.PaymentMethods_Container > h4 {
+  margin: 5px;
+  width: 100%;
+}
+.PaymentMethods_Container > div {
+  width: 100%;
+  margin: 5px 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.PaymentMethods_Container > div > img {
+  display: flex;
+  margin-left: 5px;
+  height: 25px;
+}
+.PaymentMethods_Container > button {
+  background: none;
+  margin: 5px;
+  color: #3483fa;
+  border: none;
+  cursor: pointer;
+}
