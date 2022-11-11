@@ -5,22 +5,25 @@ import "./Session.css";
 import AuthenticatorContext from "../../Context/Authenticator";
 
 const Session = () => {
-  const { auth, consult } = useContext(AuthenticatorContext);
+  const { token, session } = useContext(AuthenticatorContext);
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    const email = e.target.elements[0].value;
+
+    const username = e.target.elements[0].value;
     const password = e.target.elements[1].value;
-    consult(email, password)
+
+    session({ username, password });
   };
+
   return (
     <div className="Session_Container fluid-container">
-      {auth === null ? (
+      {token === null ? (
         <div className="login-box">
           <h3>Iniciar Session</h3>
           <form onSubmit={handlerSubmit}>
-            <input type={"text"} placeholder={"Nombre de usuario (admin)"} />
-            <input type={"password"} placeholder={"Contraseña (admin)"} />
+            <input type={"text"} placeholder={"Nombre de usuario"} />
+            <input type={"password"} placeholder={"Contraseña"} />
             <button type="submit">Iniciar Session</button>
           </form>
         </div>

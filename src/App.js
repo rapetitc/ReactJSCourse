@@ -10,6 +10,7 @@ import CreateAccount from "./Pages/CreateAccount/CreateAccount";
 import CartView from "./Pages/CartView/CartView";
 import CheckOutView from "./Pages/CheckOutView/CheckOutView";
 import Session from "./Pages/Session/Session";
+import Profile from "./Pages/Profile/Profile";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 /* Context */
 import { CartCounterProvider } from "./Context/CartCounter";
@@ -39,6 +40,7 @@ function App() {
             <Route path="done" element={<CreateAccount />}></Route>
           </Route>
           <Route path="session" element={<Session />}></Route>
+          <Route path="profile" element={<Profile />}></Route>
           <Route path="cart">
             <Route path="" element={<CartView />}></Route>
             <Route path="checkout" element={<CheckOutView />}></Route>

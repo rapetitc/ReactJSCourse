@@ -7,7 +7,7 @@ import SubscriptionNav from "./SubscriptionNav/SubscriptionNav";
 import CompactMenu from "./CompactMenu/CompactMenu";
 import MapNav from "./MapNav/MapNav";
 import Menu from "./Menu/Menu";
-import Profile from "./Profile/Profile";
+import ProfileNav from "./ProfileNav/ProfileNav";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 
 const NavBar = ({ UserName = "User" }) => {
@@ -20,7 +20,7 @@ const NavBar = ({ UserName = "User" }) => {
         <CompactMenu></CompactMenu>
         <MapNav></MapNav>
         <Menu></Menu>
-        <Profile shoppingcart={<ShoppingCart />}></Profile>
+        <ProfileNav shoppingcart={<ShoppingCart />}></ProfileNav>
       </div>
     </header>
   );

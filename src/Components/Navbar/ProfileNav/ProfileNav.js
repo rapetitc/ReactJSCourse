@@ -1,23 +1,23 @@
 import React, { useContext } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import "./Profile.css";
+import { Link } from "react-router-dom";
+import "./ProfileNav.css";
 
 import AuthenticatorContext from "../../../Context/Authenticator";
 
-const Profile = ({ shoppingcart }) => {
-  const { auth, closeSession } = useContext(AuthenticatorContext);
+const ProfileNav = ({ shoppingcart }) => {
+  const { token, closeSession } = useContext(AuthenticatorContext);
 
   const handlingSessionClose = () => {
     closeSession();
   };
 
   return (
-    <div className="Profile_Container">
-      {auth !== null ? (
+    <div className="ProfileNav_Container">
+      {token !== null ? (
         <>
           <div className="profile-menu">
             <Link to="/profile" className="profile-link">
-              Bienvenido <span>{auth.firstName}</span>{" "}
+              Bienvenido <span>{token.username}</span>{" "}
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
                 <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
               </svg>
@@ -34,9 +34,7 @@ const Profile = ({ shoppingcart }) => {
                 </Link>
               </li>
               <li>
-                <Link onClick={handlingSessionClose} className="profile-link">
-                  Cerrar Sesion
-                </Link>
+                <Link onClick={handlingSessionClose} className="profile-link">Cerrar Sesion</Link>
               </li>
             </ul>
           </div>
@@ -59,4 +57,4 @@ const Profile = ({ shoppingcart }) => {
   );
 };
 
-export default Profile;
+export default ProfileNav;
