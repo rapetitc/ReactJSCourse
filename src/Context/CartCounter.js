@@ -1,10 +1,13 @@
+import { doc, getDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
+import { db } from "../DB/DB";
 
 const CartCounterContext = createContext();
 
 export const CartCounterProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [totalQty, setTotalQty] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     let tempCounter = 0;
@@ -42,21 +45,23 @@ export const CartCounterProvider = ({ children }) => {
     console.log("Removing", itemId);
   };
 
-  const getData = async (cart) => {
-    const URL_BASE = "https://dummyjson.com/products/";
-    const tempValue = [];
+  const getData = async () => {
+    let tempValue = [];
+    let tempPrice = 0;
 
     for (let i = 0; i < cart.length; i++) {
-      const data = await fetch(URL_BASE + cart[i].itemId);
-      const product = await data.json();
-      console.log(product);
-      tempValue.push(product);
+      const docRef = doc(db, "products", cart[i].itemId);
+      const docSnap = await getDoc(docRef);
+
+      tempValue.push({ ...docSnap.data(), id: docSnap.id, quantity: cart[i].quantity });
+      tempPrice += docSnap.data().price;
     }
 
+    setTotalPrice(tempPrice);
     return tempValue;
   };
 
-  return <CartCounterContext.Provider value={{ cart, totalQty, setCart, addItemToCart, removeItemFromCart, getData }}>{children}</CartCounterContext.Provider>;
+  return <CartCounterContext.Provider value={{ cart, totalQty, totalPrice, setCart, addItemToCart, removeItemFromCart, getData }}>{children}</CartCounterContext.Provider>;
 };
 
 export default CartCounterContext;

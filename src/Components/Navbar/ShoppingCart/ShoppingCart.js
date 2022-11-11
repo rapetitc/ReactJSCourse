@@ -5,6 +5,7 @@ import "./ShoppingCart.css";
 
 const ShoppingCart = () => {
   const { totalQty } = useContext(CartCounterContext);
+  console.log(totalQty);
 
   return (
     <div className="ShoppingCart_Container">

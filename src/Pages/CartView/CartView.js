@@ -7,14 +7,14 @@ import { Link } from "react-router-dom";
 const CartView = () => {
   const [tempCart, setTempCart] = useState([]);
 
-  const { cart, getData } = useContext(CartCounterContext);
+  const { getData, totalPrice, totalQty } = useContext(CartCounterContext);
 
   useEffect(() => {
     const call = async () => {
-      setTempCart(await getData(cart));
+      setTempCart(await getData());
     };
     call();
-  }, [cart, getData]);
+  }, [getData]);
 
   return (
     <div className="CartView_Container container">
@@ -36,7 +36,7 @@ const CartView = () => {
                     </div>
                   </div>
                   <div className="stack-description">
-                    <h1>{product.title}</h1>
+                    <h1>{product.tittle}</h1>
                     <p>{product.description}</p>
                     <div className="stack-description-buttons">
                       <button>Eliminar</button>
@@ -56,7 +56,7 @@ const CartView = () => {
                       Precio Total Unitario: <span>${product.price}</span>
                     </p>
                     <p>
-                      Cantidad: <span>5</span>
+                      Cantidad: <span>{product.quantity}</span>
                     </p>
                     <p>
                       Precio total: <span>${product.price}</span>
@@ -68,7 +68,10 @@ const CartView = () => {
             <div className="stack-buttons-bottom" key={"stack-buttons-bottom"}>
               <div>
                 <p>
-                  Total a pagar: <span>$0</span>
+                  Total articulos: <span>{totalQty}</span>
+                </p>
+                <p>
+                  Total a pagar: <span>${totalPrice}</span>
                 </p>
                 <Link to={"/cart/checkout"}>Proceder a paga</Link>
               </div>

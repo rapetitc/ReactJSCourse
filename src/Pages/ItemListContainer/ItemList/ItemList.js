@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./ItemList.css";
 
 const ItemList = ({ database }) => {
+
+
   return (
     <div className="ItemList_Container">
       <h2>Productos que te puedan interesar</h2>
@@ -12,10 +14,10 @@ const ItemList = ({ database }) => {
             <div className="card" key={index}>
               <Link to={"/product/" + element.id}>
                 <div className="card-img">
-                  <img src={element.thumbnail} alt="..." />
+                  <img src={element.images[0]} alt={element.tittle} />
                 </div>
                 <div className="card-body">
-                  <h5 className="card-title">{element.title}</h5>
+                  <h5 className="card-title">{element.tittle}</h5>
                   <div className="card-price">
                     <p>{element.discount ? "$" + element.discount : ""}</p>
                     <p>${element.price}</p>

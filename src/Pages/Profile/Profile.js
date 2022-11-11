@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { serverTimestamp, collection, addDoc } from "firebase/firestore";
 import { db } from "../../DB/DB";
+import { isArrow, isRemoving, isTab } from "../../utilities/utilities";
 import "./Profile.css";
 
 import AuthenticatorContext from "../../Context/Authenticator";
@@ -18,10 +19,10 @@ const Profile = () => {
       brand: form[1].value,
       description: form[2].value,
       category: form[3].value,
-      price: form[4].value,
-      stock: form[5].value,
+      price: parseInt(form[4].value),
+      stock: parseInt(form[5].value),
       rating: 0,
-      images: form[6].value,
+      images: [form[6].value],
       publisher: token.username,
       creationdate: serverTimestamp(),
       status: "active",
@@ -41,11 +42,11 @@ const Profile = () => {
   const handlingTitle = (e) => {
     const key = e.key;
     const length = e.target.value.length;
-    //console.log("Titulo:", key, parseInt(key), isNaN(key));
-    if (key === "Backspace" || key === "Delete") {
+
+    if (isRemoving(key) || isArrow(key) || isTab(key)) {
       return true;
     }
-    if (length >= 100) {
+    if (length >= 70) {
       e.preventDefault();
     }
   };
@@ -53,7 +54,7 @@ const Profile = () => {
     const key = e.key;
     const length = e.target.value.length;
 
-    if (key === "Backspace" || key === "Delete") {
+    if (isRemoving(key) || isArrow(key) || isTab(key)) {
       return true;
     }
     if (length >= 50) {
@@ -63,8 +64,8 @@ const Profile = () => {
   const handlingDescription = (e) => {
     const key = e.key;
     const length = e.target.value.length;
-    console.log(length);
-    if (key === "Backspace" || key === "Delete") {
+
+    if (isRemoving(key) || isArrow(key) || isTab(key)) {
       return true;
     }
     if (length >= 300) {
@@ -73,12 +74,13 @@ const Profile = () => {
   };
   const handlingCategory = (e) => {
     const target = e.target;
+    console.log("Category:", target);
     console.log("Category:", target.value);
   };
   const handlingPrice = (e) => {
     const key = e.key;
-    console.log("Price:", key);
-    if (key === "Backspace" || key === "Delete") {
+
+    if (isRemoving(key) || isArrow(key) || isTab(key)) {
       return true;
     }
     if (isNaN(key)) {
@@ -87,8 +89,8 @@ const Profile = () => {
   };
   const handlingStock = (e) => {
     const key = e.key;
-    console.log("Stock:", key);
-    if (key === "Backspace" || key === "Delete") {
+
+    if (isRemoving(key) || isArrow(key) || isTab(key)) {
       return true;
     }
     if (isNaN(key)) {
@@ -97,7 +99,7 @@ const Profile = () => {
   };
   const handlingImgs = (e) => {
     const target = e.target;
-    console.log("imgs:", target.key);
+    console.log("imgs:", target);
   };
 
   return (
@@ -140,7 +142,7 @@ const Profile = () => {
                 <label>Disponibilidad:</label>
                 <input type="text" placeholder="Disponibilidad" onKeyDown={handlingStock} required />
                 <label>Imagenes:</label>
-                <input type="text" placeholder="Enlace de las imagenes" onKeyDown={handlingImgs} required />
+                <input type="text" placeholder="Enlace de las imagenes, (Separa cada url con una coma ',' )." onKeyDown={handlingImgs} required />
                 <button type="submit">Publicar Producto</button>
               </form>
             </div>

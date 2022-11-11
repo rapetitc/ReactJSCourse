@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../DB/DB";
 import "./ItemDetailContainer.css";
 
 import RatingCalculator from "../../Components/RatingCalculator/RatingCalculator";
@@ -64,35 +66,35 @@ const ItemDetailContainer = () => {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/" + params.id)
-      .then((data) => data.json())
-      .then((json) => {
-        setProduct([json]);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    getProducts(params.id);
   }, [params.id]);
 
+  const getProducts = async (id) => {
+    const docRef = doc(db, "products", id);
+    const docSnap = await getDoc(docRef);
+
+    setProduct([{ ...docSnap.data(), id: docSnap.id }]);
+  };
+
   return (
-    <div className="container ItemDetailContainer_Container">
+    <div className="ItemDetailContainer_Container container">
       {product.length > 0 ? (
         <div>
           <div className="product-imgs">
             <div className="product-selection-box">
               {product[0].images.map((img, index) => {
-                return <img src={img} alt={product.title} className="product-img" key={index} />;
+                return <img src={img} alt={product.tittle} className="product-img" key={index} />;
               })}
             </div>
             <div className="product-img-preview">
-              <img src={product[0].images[0]} alt={product[0].title} />
+              <img src={product[0].images[0]} alt={product[0].tittle} />
             </div>
           </div>
           <div className="card-body">
             <div className="card-description">
               <p className="card-availability">Nuevo | Disponibilidad de {product[0].stock}</p>
               <div className="card-title-container">
-                <h3 className="card-title">{product[0].title + " " + product[0].description}</h3>
+                <h3 className="card-title">{product[0].tittle + " " + product[0].description}</h3>
                 <input type={"checkbox"} />
                 <button>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-heart" viewBox="0 0 16 16">
