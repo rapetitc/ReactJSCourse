@@ -8,7 +8,6 @@ import Categories from "./Pages/Categories/Categories";
 import Category from "./Pages/Category/Category";
 import CreateAccount from "./Pages/CreateAccount/CreateAccount";
 import CartView from "./Pages/CartView/CartView";
-import CheckOutView from "./Pages/CheckOutView/CheckOutView";
 import Session from "./Pages/Session/Session";
 import Profile from "./Pages/Profile/Profile";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
@@ -43,7 +42,9 @@ function App() {
           <Route path="profile" element={<Profile />}></Route>
           <Route path="cart">
             <Route path="" element={<CartView />}></Route>
-            <Route path="checkout" element={<CheckOutView />}></Route>
+            <Route path="checkout" element={<CartView />}></Route>
+            <Route path="confirmation" element={<CartView />}></Route>
+            <Route path="congratulations" element={<CartView />}></Route>
           </Route>
           <Route path="*" element={<NotFoundPage />}></Route>
         </Routes>

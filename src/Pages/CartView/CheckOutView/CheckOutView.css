@@ -1,0 +1,46 @@
+.CheckOutView_Container {
+  background-color: white;
+  min-height: calc(100vh - 100px);
+}
+.CheckOutView_Container > h3 {
+  margin: 0px auto;
+  padding: 10px 30px;
+  width: 80%;
+  font-size: 26px;
+  text-align: end;
+  border-bottom: 1px solid lightgray;
+}
+.CheckOutView_Container > p {
+  margin: 0px auto;
+  padding: 10px 30px;
+  width: 80%;
+  font-size: 16px;
+  text-align: center;
+  color: gray;
+}
+.CheckOutView_Container > form {
+  width: 100%;
+}
+.CheckOutView_Container > form > h4 {
+  background-color: lightgray;
+  padding: 5px;
+  margin: 0 auto;
+  width: 90%;
+  font-size: 22px;
+  border-radius: 5px;
+}
+.CheckOutView_Container > form > div {
+  padding: 5px;
+  margin: 15px auto;
+  width: 90%;
+}
+.CheckOutView_Container > form > div > input {
+  margin: 5px 15px;
+  height: 30px;
+  min-width: 200px;
+}
+.CheckOutView_Container > form > button {
+  padding: 5px;
+  margin: 0 auto;
+  cursor: pointer;
+}

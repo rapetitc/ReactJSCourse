@@ -1,23 +1,29 @@
+import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { db } from "../../DB/DB";
 import "./Category.css";
 
 const Category = () => {
   const params = useParams();
   const [category, setCategory] = useState([]);
 
-  const URL_BASE = "https://dummyjson.com/products/category/" + params.id;
-
   useEffect(() => {
-    fetch(URL_BASE)
-      .then((data) => data.json())
-      .then((data) => {
-        setCategory([...data.products]);
-      })
-      .catch((e) => {
-        console.log(e);
+    const getCategory = async () => {
+      const productsTable = collection(db, "products");
+
+      const querySnapshot = await getDocs(query(productsTable, where("category", "==", params.id)));
+
+      let tempCategory = [];
+      querySnapshot.forEach((element) => {
+        const tempData = element.data();
+        tempCategory.push({ ...tempData, id: element.id });
       });
-  }, [URL_BASE]);
+
+      setCategory(tempCategory);
+    };
+    getCategory();
+  }, [params.id]);
 
   return (
     <div className="Category_Container container">
@@ -29,10 +35,10 @@ const Category = () => {
               <div className="card" key={index}>
                 <Link to={"/product/" + element.id}>
                   <div className="card-img">
-                    <img src={element.thumbnail} alt="..." />
+                    <img src={element.images[0]} alt="..." />
                   </div>
                   <div className="card-body">
-                    <h5 className="card-title">{element.title}</h5>
+                    <h5 className="card-title">{element.tittle}</h5>
                     <div className="card-price">
                       <p>{element.discount ? "$" + element.discount : ""}</p>
                       <p>${element.price}</p>

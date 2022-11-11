@@ -19,7 +19,7 @@ const ItemList = ({ database }) => {
                 <div className="card-body">
                   <h5 className="card-title">{element.tittle}</h5>
                   <div className="card-price">
-                    <p>{element.discount ? "$" + element.discount : ""}</p>
+                    <p>{element.discount}</p>
                     <p>${element.price}</p>
                   </div>
                 </div>

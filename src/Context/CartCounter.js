@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, limit, query, where } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 import { db } from "../DB/DB";
 
@@ -21,7 +21,6 @@ export const CartCounterProvider = ({ children }) => {
 
   const addItemToCart = (itemId, quantity) => {
     if (checkingItemIntoCart(itemId)) {
-      console.log("El producto se encuenta agregado al carrito");
       let tempCart = [];
       cart.forEach((product) => {
         if (itemId === product.itemId) {
@@ -33,16 +32,41 @@ export const CartCounterProvider = ({ children }) => {
         }
         return tempCart.push(product);
       });
-      console.log(tempCart);
+      //console.log(tempCart);
       setCart(tempCart);
     } else {
-      console.log("El producto no se encuenta agregado al carrito");
       setCart(cart.length > 0 ? [...cart, { itemId, quantity }] : [{ itemId, quantity }]);
     }
   };
 
   const removeItemFromCart = (itemId) => {
     console.log("Removing", itemId);
+  };
+
+  const checkDiscount = async (productId) => {
+    const discountToReturn = 0;
+
+    const discountsTable = collection(db, "discounts");
+    const docSnapshot = await getDocs(query(discountsTable, where("itemtoapply", "==", productId), limit(1)));
+
+    if (!docSnapshot.empty) {
+      const item = docSnapshot.docs.data();
+      console.log("Deberia aplicar el siguiente descuento                 :", item.discount);
+    }
+    return discountToReturn;
+  };
+
+  const checkTaxes = async (categoryId) => {
+    const taxToReturn = 0;
+
+    const discountsTable = collection(db, "taxes");
+    const docSnapshot = await getDocs(query(discountsTable, where("categorytoapply", "==", categoryId), limit(1)));
+
+    if (!docSnapshot.empty) {
+      const item = docSnapshot.docs.data();
+      console.log("Deberia aplicar el siguiente impuesto:", item.tax);
+    }
+    return taxToReturn;
   };
 
   const getData = async () => {
@@ -53,8 +77,14 @@ export const CartCounterProvider = ({ children }) => {
       const docRef = doc(db, "products", cart[i].itemId);
       const docSnap = await getDoc(docRef);
 
-      tempValue.push({ ...docSnap.data(), id: docSnap.id, quantity: cart[i].quantity });
-      tempPrice += docSnap.data().price;
+      const productId = docSnap.id;
+      const product = docSnap.data();
+      const discount = await checkDiscount(productId);
+      const tax = await checkTaxes(productId);
+      const totalUnitPrice = product.price + (product.price - discount) * (tax / 100);
+
+      tempValue.push({ ...product, id: docSnap.id, quantity: cart[i].quantity, discount: discount, tax: tax, totalunitprice: totalUnitPrice });
+      tempPrice += totalUnitPrice * cart[i].quantity;
     }
 
     setTotalPrice(tempPrice);
