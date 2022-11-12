@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./EmailVerification.css";
 
-const EmailVerification = ({ profile, setProfile }) => {
+const EmailVerification = ({ caStatus }) => {
   const navigate = useNavigate();
 
   const handlingSubmit = (e) => {
     e.preventDefault();
     if (e.target[0].validity.valid) {
-      setProfile({ ...profile, email: e.target[0].value });
-      navigate("/create-account/requirements");
+      localStorage.setItem("caStatus", JSON.stringify({ ...caStatus, e: e.target[0].value }));
+      navigate("/create-account");
     }
-    console.log();
   };
+
+  useEffect(() => {
+    if (caStatus.TaC === false) {
+      navigate("/create-account");
+    }
+  }, [caStatus, navigate]);
 
   return (
     <div className="EmailVerification_Container">

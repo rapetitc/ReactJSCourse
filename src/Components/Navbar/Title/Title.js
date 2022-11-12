@@ -6,10 +6,10 @@ import logo from "../../../Media/Mercado-Libre-Logo.png";
 
 const Title = () => {
   return (
-    <div className="Title-Container">
+    <div className="Title_Container">
       <Link to="/">
-        <img className="Title-Logo" src={logo} alt="Online Store" />
-        <h1 className="Title">free market</h1>
+        <img className="title-logo" src={logo} alt="Online Store" />
+        <h1 className="title">free market</h1>
       </Link>
     </div>
   );

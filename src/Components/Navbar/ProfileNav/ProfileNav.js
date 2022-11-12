@@ -4,7 +4,7 @@ import "./ProfileNav.css";
 
 import AuthenticatorContext from "../../../Context/Authenticator";
 
-const ProfileNav = ({ shoppingcart }) => {
+const ProfileNav = () => {
   const { token, closeSession } = useContext(AuthenticatorContext);
 
   const handlingSessionClose = () => {
@@ -34,7 +34,9 @@ const ProfileNav = ({ shoppingcart }) => {
                 </Link>
               </li>
               <li>
-                <Link onClick={handlingSessionClose} className="profile-link">Cerrar Sesion</Link>
+                <Link onClick={handlingSessionClose} className="profile-link">
+                  Cerrar Sesion
+                </Link>
               </li>
             </ul>
           </div>
@@ -52,7 +54,6 @@ const ProfileNav = ({ shoppingcart }) => {
           </Link>
         </>
       )}
-      {shoppingcart}
     </div>
   );
 };

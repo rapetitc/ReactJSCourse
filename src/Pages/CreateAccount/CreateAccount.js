@@ -1,65 +1,74 @@
 import React, { useEffect, useState } from "react";
-import { useHref, useNavigate } from "react-router-dom";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { Route, Routes, useHref, useNavigate } from "react-router-dom";
 import "./CreateAccount.css";
-import { db } from "../../DB/DB";
 
 import Landing from "./Landing/Landing";
 import Requirements from "./Requirements/Requirements";
 import EmailVerification from "./EmailVerification/EmailVerification";
 import PersonalInfo from "./PersonalInfo/PersonalInfo";
-import CreatePassword from "./CreatePassword/CreatePassword.js";
+import CreatePassword from "./CreatePassword/CreatePassword";
+import Done from "./Done/Done";
 
 const CreateAccount = () => {
-  const [element, setElement] = useState(<></>);
-  const [requirements, setRequirements] = useState({ TaC: false, emailVerification: false, personalInfo: false, password: false });
-  const [profile, setProfile] = useState({ TaC: null, email: null, fname: null, lname: null, password: null });
-
+  const [caStatus, setCAStatus] = useState("");
   const navigate = useNavigate();
   const currentLocation = useHref();
 
-  const creatingAccount = async (db, data) => {
-    const dc = collection(db, "users");
-    const docRef = await addDoc(dc, {
-      TaC: data.TaC,
-      email: data.email,
-      fname: data.fname,
-      lname: data.lname,
-      password: data.password,
-      datecreation: serverTimestamp(),
+  const rLocations = (location) => {
+    const rLocations = ["/create-account/email-verification", "/create-account/personal-info", "/create-account/create-password", "/create-account/done"];
+    let result = false;
+    rLocations.forEach((e) => {
+      console.log(e, "=", location, e === location);
+      if (e === location) {
+        console.log("si");
+        result = true;
+      }
     });
-    console.log(docRef.id);
-  };
-
-  const handlingRequirements = (currentLocation) => {
-    console.log(currentLocation);
-    if (requirements.TaC === false) {
-      if (currentLocation === "/create-account/landing") {
-        setElement(<Landing setRequirements={setRequirements} requirements={requirements} profile={profile} setProfile={setProfile} />);
-      } else {
-        navigate("/create-account/landing");
-      }
-    } else {
-      if (currentLocation === "/create-account/requirements") {
-        setElement(<Requirements />);
-      } else if (currentLocation === "/create-account/email-verification") {
-        setElement(<EmailVerification profile={profile} setProfile={setProfile} />);
-      } else if (currentLocation === "/create-account/personal-info") {
-        setElement(<PersonalInfo profile={profile} setProfile={setProfile} />);
-      } else if (currentLocation === "/create-account/create-password") {
-        setElement(<CreatePassword profile={profile} setProfile={setProfile} />);
-      } else if (currentLocation === "/create-account/done") {
-        creatingAccount(db, profile);
-      } else {
-        navigate("/create-account/requirements");
-      }
-    }
+    return result;
   };
 
   useEffect(() => {
+    const defaultRequirements = { TaC: false, e: false, pi: false, p: false };
+
+    const handlingRequirements = (currentLocation) => {
+      const caStatus = localStorage.getItem("caStatus");
+
+      if (caStatus === null) {
+        localStorage.setItem("caStatus", JSON.stringify(defaultRequirements));
+      } else {
+        let tempRequirements = JSON.parse(caStatus);
+        setCAStatus(tempRequirements);
+
+        if (tempRequirements.TaC === false) {
+          console.log("TaC no fue aceptado y mostrando landing page");
+          if (currentLocation !== "/create-account/landing") {
+            navigate("/create-account/landing");
+          }
+        } else if (rLocations(currentLocation)) {
+          console.log(currentLocation);
+        } else {
+          console.log("TaC fue aceptado y mostrando requirement page");
+          if (currentLocation !== "/create-account/requirements") {
+            navigate("/create-account/requirements");
+          }
+        }
+      }
+    };
     handlingRequirements(currentLocation);
-  }, [currentLocation]);
-  return <div className="CreateAccount_Container fluid-container">{element}</div>;
+  }, [navigate, currentLocation]);
+
+  return (
+    <div className="CreateAccount_Container fluid-container">
+      <Routes>
+        <Route path="landing" element={<Landing caStatus={caStatus} />}></Route>
+        <Route path="requirements" element={<Requirements caStatus={caStatus} />}></Route>
+        <Route path="email-verification" element={<EmailVerification caStatus={caStatus} />}></Route>
+        <Route path="personal-info" element={<PersonalInfo caStatus={caStatus} />}></Route>
+        <Route path="create-password" element={<CreatePassword caStatus={caStatus} />}></Route>
+        <Route path="done" element={<Done />}></Route>
+      </Routes>
+    </div>
+  );
 };
 
 export default CreateAccount;

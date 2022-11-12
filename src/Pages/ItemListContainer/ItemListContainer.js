@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getDocs, collection, query, limit } from "firebase/firestore";
-import { db } from "../../DB/DB";
+import { db } from "../../Utilities/Firebase";
 import "./ItemListContainer.css";
 
 import ItemList from "./ItemList/ItemList";

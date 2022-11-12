@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../../../DB/DB";
+import { db } from "../../../Utilities/Firebase";
 import "./CheckOutConfirmation.css";
 
 const CheckOutConfirmation = ({ tempCart, userInfo, setOrderNumber, totalPrice }) => {

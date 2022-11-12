@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { where, doc, updateDoc, collection, query, getDocs, limit, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../DB/DB";
+import { db } from "../Utilities/Firebase";
 
 const AuthenticatorContext = createContext();
 
@@ -12,7 +12,7 @@ export const AuthenticatorProvider = ({ children }) => {
     getIPAddress();
 
     const checkingExistingLogsInIP = async () => {
-      console.log("aqui");
+      //console.log("aqui");
       const userlogsTable = collection(db, "userlogs");
       const querySnapshot = await getDocs(query(userlogsTable, where("ip", "==", IP), where("status", "==", "active")));
 

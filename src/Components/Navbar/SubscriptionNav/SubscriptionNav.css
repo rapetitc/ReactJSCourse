@@ -1,9 +1,15 @@
 .SubscriptionNav_Container {
   width: 35%;
 }
-.subscriptionNa-Link{
+.subscriptionNa-Link {
   text-align: center;
 }
 .subscriptionNa-IMG {
-    width: 320px;
+  width: 320px;
+}
+
+@media (max-width: 992px) {
+  .NavBar_Container > .container > .SubscriptionNav_Container {
+    display: none;
+  }
 }

@@ -1,6 +1,6 @@
 import { collection, doc, getDoc, getDocs, limit, query, where } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
-import { db } from "../DB/DB";
+import { db } from "../Utilities/Firebase";
 
 const CartCounterContext = createContext();
 

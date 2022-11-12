@@ -2,15 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Landing.css";
 
-const Landing = ({ setRequirements, requirements, setProfile, profile }) => {
+const Landing = ({ caStatus }) => {
   const navigate = useNavigate();
 
   const handlingSubmittingForm = (e) => {
     e.preventDefault();
     if (e.target[0].checked) {
-      setRequirements({ ...requirements, TaC: true });
-      setProfile({ ...profile, TaC: true });
-      console.log(requirements);
+      localStorage.setItem("caStatus", JSON.stringify({ ...caStatus, TaC: true }));
       navigate("/create-account");
     }
   };

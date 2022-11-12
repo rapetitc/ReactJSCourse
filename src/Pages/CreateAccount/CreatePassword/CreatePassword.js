@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreatePassword.css";
 
-const CreatePassword = ({ profile, setProfile }) => {
+const CreatePassword = ({ caStatus }) => {
   const navigate = useNavigate();
 
   const handlingSubmit = (e) => {
     e.preventDefault();
     console.log(e.target[0].value.length);
     if (e.target[0].value.length > 4) {
-      setProfile({ ...profile, password: e.target[0].value });
-      navigate("/create-account/done");
+      localStorage.setItem("caStatus", JSON.stringify({ ...caStatus, p: e.target[0].value }));
+      navigate("/create-account");
     }
   };
+
+  useEffect(() => {
+    if (caStatus.TaC === false) {
+      navigate("/create-account");
+    }
+  }, [caStatus, navigate]);
 
   return (
     <div className="CreatePassword_Container">

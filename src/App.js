@@ -29,14 +29,14 @@ function App() {
             <Route path="categories" element={<Categories />}></Route>
             <Route path=":id" element={<ItemDetailContainer />}></Route>
           </Route>
-          <Route path="create-account">
-            <Route path="" element={<CreateAccount />}></Route>
+          <Route path="create-account/*" element={<CreateAccount />}>
+            {/* <Route path="" element={<CreateAccount />}></Route>
             <Route path="landing" element={<CreateAccount />}></Route>
             <Route path="requirements" element={<CreateAccount />}></Route>
             <Route path="email-verification" element={<CreateAccount />}></Route>
             <Route path="personal-info" element={<CreateAccount />}></Route>
             <Route path="create-password" element={<CreateAccount />}></Route>
-            <Route path="done" element={<CreateAccount />}></Route>
+            <Route path="done" element={<CreateAccount />}></Route> */}
           </Route>
           <Route path="session" element={<Session />}></Route>
           <Route path="profile" element={<Profile />}></Route>

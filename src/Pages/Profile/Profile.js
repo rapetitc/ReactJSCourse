@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { serverTimestamp, collection, addDoc } from "firebase/firestore";
-import { db } from "../../DB/DB";
-import { isArrow, isRemoving, isTab } from "../../utilities/utilities";
+import { db } from "../../Utilities/Firebase";
+import { isArrow, isRemoving, isTab } from "../../Utilities/KeyEvaluator";
 import "./Profile.css";
 
 import AuthenticatorContext from "../../Context/Authenticator";

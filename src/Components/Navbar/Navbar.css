@@ -2,7 +2,6 @@
   background-color: #fff159;
   display: flex;
   justify-content: center;
-  height: 100px;
   width: 100%;
 }
 .NavBar_Container > .container {
@@ -10,60 +9,36 @@
   flex-wrap: wrap;
   align-items: center;
 }
+.NavBar_Container > .container > .CompactMenuButton_Container{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 15%;
+}
+.NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton {
+  background-color: transparent;
+  display: none;
+  justify-content: center;
+  margin: 0 15px 0 10px;
+  outline: none;
+  border: 1px solid transparent;
+}
+.NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton > svg {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
+.NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton:hover {
+  color: rgb(73, 73, 73);
+  border: 1px solid rgba(211, 211, 211, 0.397);
+  border-radius: 5px;
+}
+.NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton:active {
+  color: gray;
+}
 
 @media (max-width: 992px) {
-  .NavBar_Container {
-    height: 90px;
-  }
-  .NavBar_Container > .container > .Title-Container {
-    width: 15%;
-    justify-content: center;
-  }
-  .NavBar_Container > .container > .Title-Container .Title {
-    display: none;
-  }
-  .NavBar_Container > .container > .SearchBar_Container {
-    width: 75%;
-  }
-  .NavBar_Container > .container > .SubscriptionNav_Container {
-    display: none;
-  }
-  .NavBar_Container > .container > .CompactMenu_Container {
-    display: flex;
-    width: 10%;
-  }
-  .NavBar_Container > .container > .MapNav_Container {
-    display: flex;
-    width: 100%;
-    height: 40px;
-    border-top: 1px solid lightgray;
-    justify-content: space-between;
-    cursor: pointer;
-  }
-  .NavBar_Container > .container > .MapNav_Container > div {
-    justify-content: flex-start;
-    margin-left: 10px;
-    border: none;
-  }
-  .NavBar_Container > .container > .MapNav_Container > div > svg {
-    width: 20px;
-    height: 20px;
-  }
-  .NavBar_Container > .container > .MapNav_Container > div > p {
-    width: auto;
-  }
-  .NavBar_Container > .container > .MapNav_Container > svg {
+  .NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton {
     display: block;
-    margin-right: 10px;
-    align-self: center;
-  }
-  .NavBar_Container > .container > .Menu_Container {
-    display: none;
-  }
-  .NavBar_Container > .container > .Profile_Container {
-    display: none;
-  }
-  .NavBar_Container > .container > .ShoppingCart_Container {
-    display: none;
   }
 }

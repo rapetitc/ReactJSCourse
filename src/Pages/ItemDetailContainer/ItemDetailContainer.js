@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../DB/DB";
+import { db } from "../../Utilities/Firebase";
 import "./ItemDetailContainer.css";
 
 import RatingCalculator from "../../Components/RatingCalculator/RatingCalculator";

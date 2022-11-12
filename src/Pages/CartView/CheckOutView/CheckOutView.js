@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthenticatorContext from "../../../Context/Authenticator";
-import { isArrow, isRemoving, isTab } from "../../../utilities/utilities";
+import { isArrow, isRemoving, isTab } from "../../../Utilities/KeyEvaluator";
 /* import CartCounterContext from "../../Context/CartCounter"; */
 import "./CheckOutView.css";
 

@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../../../Utilities/Firebase";
 import "./Requirements.css";
 
-const Requirements = () => {
+const Requirements = ({ caStatus }) => {
   const navigate = useNavigate();
 
-  const handlingValidator = (value) => {
-    if (value === "email") {
-      navigate("/create-account/email-verification");
-    } else if (value === "profile") {
-      navigate("/create-account/personal-info");
-    } else {
-      navigate("/create-account/create-password");
-    }
+  const creatingAccount = async (db, data) => {
+    const dc = collection(db, "users");
+    await addDoc(dc, {
+      TaC: data.TaC,
+      email: data.e,
+      fname: data.pi.fname,
+      lname: data.pi.lname,
+      password: data.p,
+      datecreation: serverTimestamp(),
+    });
   };
+
+  const handlingSubmit = () => {
+    console.log("creando cuenta");
+    creatingAccount(db, caStatus).then(() => {
+      localStorage.removeItem("caStatus");
+      navigate("/create-account/done");
+    });
+  };
+
+  useEffect(() => {
+    if (caStatus.TaC === false) {
+      navigate("/create-account");
+    }
+  }, [caStatus, navigate]);
 
   return (
     <div className="Requirements_Container">
@@ -34,13 +52,17 @@ const Requirements = () => {
             <p>Validar e-mail</p>
             <p>Lo usarás para recuperar tu cuenta.</p>
           </div>
-          <button
-            onClick={() => {
-              handlingValidator("email");
-            }}
-          >
-            Validar
-          </button>
+          {caStatus.e !== false ? (
+            <button disabled>Validar</button>
+          ) : (
+            <button
+              onClick={() => {
+                navigate("/create-account/email-verification");
+              }}
+            >
+              Validar
+            </button>
+          )}
         </div>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-person-badge" viewBox="0 0 16 16">
@@ -51,13 +73,17 @@ const Requirements = () => {
             <p>Completar tu perfil</p>
             <p>Elige cómo quieres que te llamemos.</p>
           </div>
-          <button
-            onClick={() => {
-              handlingValidator("profile");
-            }}
-          >
-            Validar
-          </button>
+          {caStatus.pi !== false ? (
+            <button disabled>Validar</button>
+          ) : (
+            <button
+              onClick={() => {
+                navigate("/create-account/personal-info");
+              }}
+            >
+              Validar
+            </button>
+          )}
         </div>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-shield-lock" viewBox="0 0 16 16">
@@ -68,15 +94,20 @@ const Requirements = () => {
             <p>Crear contraseña</p>
             <p>Servirá para ingresar a tu cuenta.</p>
           </div>
-          <button
-            onClick={() => {
-              handlingValidator("");
-            }}
-          >
-            Validar
-          </button>
+          {caStatus.p !== false ? (
+            <button disabled>Validar</button>
+          ) : (
+            <button
+              onClick={() => {
+                navigate("/create-account/create-password");
+              }}
+            >
+              Validar
+            </button>
+          )}
         </div>
       </div>
+      {caStatus.TaC && caStatus.e !== false && caStatus.pi !== false && caStatus.p !== false ? <button onClick={handlingSubmit}>Crear Cuenta</button> : <button disabled>Crear Cuenta</button>}
     </div>
   );
 };
