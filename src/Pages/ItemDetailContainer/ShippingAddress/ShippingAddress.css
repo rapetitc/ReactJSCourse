@@ -1,6 +1,9 @@
 .ShippingAddress_Container {
-    margin-top: 15px;
-  display: flex;
+  margin: 5px;
+  display: inline-flex;
+}
+.ShippingAddress_Container > * {
+  margin: 5px;
 }
 .ShippingAddress_Container > svg {
   color: greenyellow;

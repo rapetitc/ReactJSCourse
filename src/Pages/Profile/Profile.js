@@ -108,26 +108,28 @@ const Profile = () => {
         <Navigate to={"/session"} />
       ) : (
         <>
-          <div className="profile-show">
+          <div className="profile-content">
             <h3>Dashboard</h3>
-            <div className="profile-show-status">
+            <div className="profile-content-status">
               <h4>Estado</h4>
               <div>
                 <p>Contenido de Estado</p>
               </div>
             </div>
-            <div className="profile-show-addproduct">
+            <div className="profile-content-addproduct">
               <h4>Agrega un producto</h4>
               <form onSubmit={handlingSubmit}>
                 <label>Titulo:</label>
-                <input type="text" placeholder="Titulo" onKeyDown={handlingTitle} required />
+                <input className="input-bt" type="text" placeholder="Zapatos Air Jordans, Talla 10 US" onKeyDown={handlingTitle} required />
                 <label>Marca:</label>
-                <input type="text" placeholder="Marca" onKeyDown={handlingBrand} />
+                <input className="input-bt" type="text" placeholder="Nike, Adidas, Jordan, etc." onKeyDown={handlingBrand} />
                 <label>Description:</label>
-                <textarea placeholder="Description" onKeyDown={handlingDescription}></textarea>
+                <textarea class="textarea" placeholder="Describe las caracteristicas tu producto a detalle, asi tu comprador estara al tanto de ello!. (Max 300 letras)" name="" id="" cols="30" rows="2" minlength="50" maxlength="300" onKeyDown={handlingDescription}></textarea>
                 <label>Categoria:</label>
-                <select required onChange={handlingCategory}>
-                  <option disabled>Selecciona Categoria</option>
+                <select class="select" name="" id="" required onChange={handlingCategory}>
+                  <option selected disabled>
+                    Selecciona Categoria
+                  </option>
                   <option>Ropa para hombre</option>
                   <option>Ropa para mujeres</option>
                   <option>Ropa para niños</option>
@@ -138,21 +140,23 @@ const Profile = () => {
                   <option>Comida</option>
                 </select>
                 <label>Precio:</label>
-                <input type="text" placeholder="Precio" onKeyDown={handlingPrice} />
+                <input className="input-bt" type="text" placeholder="Precio" onKeyDown={handlingPrice} />
                 <label>Disponibilidad:</label>
-                <input type="text" placeholder="Disponibilidad" onKeyDown={handlingStock} required />
+                <input className="input-bt" type="text" placeholder="Disponibilidad" onKeyDown={handlingStock} required />
                 <label>Imagenes:</label>
-                <input type="text" placeholder="Enlace de las imagenes, (Separa cada url con una coma ',' )." onKeyDown={handlingImgs} required />
-                <button type="submit">Publicar Producto</button>
+                <input className="input-bt" type="text" placeholder="Enlace de las imagenes, (Separa cada url con una coma ',' )." onKeyDown={handlingImgs} required />
+                <button className="btn" type="submit">
+                  Publicar Producto
+                </button>
               </form>
             </div>
-            <div>
+            <div className="profile-content-sales">
               <h4>Ventas</h4>
               <div>
                 <p>Contenido de Ventas</p>
               </div>
             </div>
-            <div>
+            <div className="profile-content-purchases">
               <h4>Compras</h4>
               <div>
                 <p>Contenido de Compras</p>

@@ -1,0 +1,92 @@
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--btn-color);
+  font-size: 15px;
+  text-align: center;
+  background-color: var(--btn-bg-color);
+  border: 1px solid var(--btn-br-color);
+  border-radius: 7px;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.btn:hover {
+  color: var(--hover-btn-color);
+  background-color: var(--hover-btn-bg-color);
+  border-color: var(--hover-btn-br-color);
+}
+.btn:active {
+  color: var(--active-btn-color);
+  background-color: var(--active-btn-bg-color);
+  border-color: var(--active-btn-br-color);
+}
+.btn:disabled {
+  color: var(--disabled-btn-color);
+  background-color: var(--disabled-btn-bg-color);
+  border-color: var(--disabled-btn-br-color);
+}
+
+.btn-color-t {
+  color: gray;
+  background-color: white;
+  border: 1px solid gray;
+}
+.btn-color-t:hover {
+  color: white;
+  background-color: gray;
+  border-color: lightgray;
+}
+.btn-color-t:active {
+  color: gray;
+  background-color: white;
+  border-color: gray;
+}
+.btn-color-t:disabled {
+  color: gray;
+  background-color: lightgray;
+  border-color: lightgray;
+}
+
+.btn-group {
+  display: inline-flex;
+}
+.btn-group * {
+  border-radius: 0 !important ;
+}
+.btn-group *:first-child {
+  border-radius: 5px 0 0 5px !important;
+}
+.btn-group *:last-child {
+  border-radius: 0 5px 5px 0 !important;
+}
+.btn-group *:first-child:focus {
+  border-radius: 5px 0 0 5px !important;
+}
+.btn-group *:last-child:focus {
+  border-radius: 0 5px 5px 0 !important;
+}
+
+.link {
+  display: inline-block;
+  padding: 5px;
+  color: rgb(41, 41, 41);
+  font-size: 16px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+}
+.link:hover {
+  color: gray;
+  text-decoration: underline;
+}
+.link:active {
+  color: lightgray;
+}
+.link:disabled {
+  color: gray;
+}

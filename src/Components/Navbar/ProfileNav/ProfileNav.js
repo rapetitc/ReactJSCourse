@@ -24,32 +24,32 @@ const ProfileNav = () => {
             </Link>
             <ul>
               <li>
-                <Link to={"/profile"} className="profile-link">
+                <Link to={"/profile"} className="link">
                   Perfil
                 </Link>
               </li>
               <li>
-                <Link to={"/profile/settings"} className="profile-link">
+                <Link to={"/profile/settings"} className="link">
                   Configuracion
                 </Link>
               </li>
               <li>
-                <Link onClick={handlingSessionClose} className="profile-link">
+                <Link onClick={handlingSessionClose} className="link">
                   Cerrar Sesion
                 </Link>
               </li>
             </ul>
           </div>
-          <Link to="/profile/purchases" className="profile-link">
+          <Link to="/profile/purchases" className="link">
             Mis compras
           </Link>
         </>
       ) : (
         <>
-          <Link to="/create-account" className="profile-link">
+          <Link to="/create-account" className="link" >
             Crear una cuenta
           </Link>
-          <Link to="/session" className="profile-link">
+          <Link to="/session" className="link">
             Iniciar Sesion
           </Link>
         </>

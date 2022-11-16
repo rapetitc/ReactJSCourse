@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Navbar.css";
 
 import Title from "./Title/Title";
@@ -9,16 +9,12 @@ import Menu from "./Menu/Menu";
 import ProfileNav from "./ProfileNav/ProfileNav";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 
+import BehaviorsContext from "../../Context/Behaviors";
+
 const NavBar = () => {
-  const [outerWidth, setOuterWidth] = useState(window.outerWidth);
   const [closeMenu, setCompactMenu] = useState(false);
 
-  const reportWindowSize = (e) => {
-    setTimeout(() => {
-      setOuterWidth(window.outerWidth);
-    }, 100);
-  };
-  window.addEventListener("resize", reportWindowSize);
+  const { outerWidth } = useContext(BehaviorsContext);
 
   const handlingCompactMenu = () => {
     if (closeMenu) {
@@ -29,13 +25,10 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    console.log(outerWidth);
     if (outerWidth > 992) {
       setCompactMenu(false);
     }
   }, [outerWidth]);
-
-  console.log(outerWidth < 992);
 
   return (
     <header className="NavBar_Container fluid-container">

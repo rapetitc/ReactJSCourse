@@ -12,9 +12,11 @@ const Requirements = ({ caStatus }) => {
     await addDoc(dc, {
       TaC: data.TaC,
       email: data.e,
+      username: data.pi.uname,
       fname: data.pi.fname,
       lname: data.pi.lname,
       password: data.p,
+      rol: "customer",
       datecreation: serverTimestamp(),
     });
   };

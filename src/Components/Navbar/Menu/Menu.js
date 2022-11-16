@@ -10,7 +10,6 @@ const navLinks = [
 ];
 
 const Menu = ({ closeMenu, outerWidth }) => {
-  console.log(outerWidth);
   return closeMenu || closeMenu === undefined ? (
     <div className="Menu_Container">
       <nav>

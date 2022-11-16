@@ -1,6 +1,6 @@
 .RatingCalculator_Container {
-  display: flex;
-  width: 100%;
+  display: inline-flex;
+  margin: 5px;
   height: 15px;
   color: #3483fa;
   cursor: pointer;

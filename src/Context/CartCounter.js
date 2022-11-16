@@ -9,13 +9,9 @@ export const CartCounterProvider = ({ children }) => {
   const [totalQty, setTotalQty] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  useEffect(() => {
-    let tempCounter = 0;
-    cart.forEach((item) => {
-      tempCounter += item.quantity;
-    });
-    setTotalQty(tempCounter);
-  }, [cart]);
+  const updatingCartInLs = (cart) => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
 
   const checkingItemIntoCart = (idToCheck) => cart.some((item) => item.itemId === idToCheck);
 
@@ -32,9 +28,10 @@ export const CartCounterProvider = ({ children }) => {
         }
         return tempCart.push(product);
       });
-      //console.log(tempCart);
+      updatingCartInLs(tempCart);
       setCart(tempCart);
     } else {
+      updatingCartInLs(cart.length > 0 ? [...cart, { itemId, quantity }] : [{ itemId, quantity }]);
       setCart(cart.length > 0 ? [...cart, { itemId, quantity }] : [{ itemId, quantity }]);
     }
   };
@@ -90,6 +87,25 @@ export const CartCounterProvider = ({ children }) => {
     setTotalPrice(tempPrice);
     return tempValue;
   };
+
+  useEffect(() => {
+    let existsCartInLs = localStorage.getItem("cart");
+
+    if (existsCartInLs === null) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } else {
+      existsCartInLs = JSON.parse(existsCartInLs);
+      if (existsCartInLs.length !== cart.length) {
+        setCart(existsCartInLs);
+      }
+    }
+
+    let tempCounter = 0;
+    cart.forEach((item) => {
+      tempCounter += item.quantity;
+    });
+    setTotalQty(tempCounter);
+  }, [cart, setCart]);
 
   return <CartCounterContext.Provider value={{ cart, totalQty, totalPrice, setCart, addItemToCart, removeItemFromCart, getData }}>{children}</CartCounterContext.Provider>;
 };
