@@ -1,0 +1,12 @@
+.Congratulation_Container {
+  padding-top: 20px;
+  width: max-content;
+}
+.Congratulation_Container > * {
+  padding: 10px;
+}
+
+.Congratulation_Container > h4 {
+  font-size: 22px;
+  text-align: center;
+}

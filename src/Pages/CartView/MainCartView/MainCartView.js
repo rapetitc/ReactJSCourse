@@ -1,31 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import "./MainCartView.css";
 
-const Main = ({ tempCart, totalPrice, totalQty }) => {
+import CartCounterContext from "../../../Context/CartCounter";
+
+const MainCartView = ({ fullCart, totalPrice, totalQty }) => {
+  const { removeItemFromCart } = useContext(CartCounterContext);
+
+
   return (
-    <div className="CartView_Container container">
+    <div className="MainCartView_Container">
       <h2>Carrito de compras</h2>
       <div className="stack-group">
-        {tempCart.length > 0 ? (
+        {fullCart.length > 0 ? (
           <>
-            <div className="stack-buttons-top" key={"stack-buttons-top"}>
-              <button>Eliminar todos</button>
-              <button>Eliminar seleccionados</button>
+            <div className="stack-header">
+              <button
+                className="link"
+                onClick={() => {
+                  removeItemFromCart("*");
+                }}
+              >
+                Eliminar todos
+              </button>
             </div>
-            {tempCart.map((product, i) => {
+            {fullCart.map((product, i) => {
               return (
                 <div className="stack" key={i}>
-                  <div className="stack-img-group">
-                    <input type={"checkbox"} />
-                    <div className="stack-img">
-                      <img src={product.images[0]} alt={product.title} />
-                    </div>
+                  <div className="stack-img">
+                    <img src={product.images[0]} alt={product.title} />
                   </div>
                   <div className="stack-description">
-                    <h1>{product.tittle}</h1>
+                    <h2>{product.tittle}</h2>
                     <p>{product.description}</p>
                     <div className="stack-description-buttons">
-                      <button>Eliminar</button>
+                      <button
+                        className="link"
+                        onClick={() => {
+                          removeItemFromCart(product.id);
+                        }}
+                      >
+                        Eliminar
+                      </button>
                     </div>
                   </div>
                   <div className="stack-details">
@@ -51,7 +67,7 @@ const Main = ({ tempCart, totalPrice, totalQty }) => {
                 </div>
               );
             })}
-            <div className="stack-buttons-bottom" key={"stack-buttons-bottom"}>
+            <div className="stack-footer">
               <div>
                 <p>
                   Total articulos: <span>{totalQty}</span>
@@ -59,7 +75,9 @@ const Main = ({ tempCart, totalPrice, totalQty }) => {
                 <p>
                   Total a pagar: <span>${totalPrice}</span>
                 </p>
-                <Link to={"/cart/checkout"}>Proceder a paga</Link>
+                <Link to={"/cart/checkout"} className="btn">
+                  Proceder a paga
+                </Link>
               </div>
             </div>
           </>
@@ -71,4 +89,4 @@ const Main = ({ tempCart, totalPrice, totalQty }) => {
   );
 };
 
-export default Main;
+export default MainCartView;

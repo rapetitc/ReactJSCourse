@@ -4,13 +4,23 @@ import { db } from "../Utilities/Firebase";
 
 const CartCounterContext = createContext();
 
+const checkingCartInLS = () => {
+  const temp = JSON.parse(localStorage.getItem("cart"));
+  if (temp === null) {
+    localStorage.setItem("cart", JSON.stringify([]));
+  } else {
+    return temp;
+  }
+};
+
 export const CartCounterProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(checkingCartInLS());
   const [totalQty, setTotalQty] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const updatingCartInLs = (cart) => {
+  const updatingCart = (cart) => {
     localStorage.setItem("cart", JSON.stringify(cart));
+    setCart(cart);
   };
 
   const checkingItemIntoCart = (idToCheck) => cart.some((item) => item.itemId === idToCheck);
@@ -28,16 +38,20 @@ export const CartCounterProvider = ({ children }) => {
         }
         return tempCart.push(product);
       });
-      updatingCartInLs(tempCart);
-      setCart(tempCart);
+      updatingCart(tempCart);
     } else {
-      updatingCartInLs(cart.length > 0 ? [...cart, { itemId, quantity }] : [{ itemId, quantity }]);
-      setCart(cart.length > 0 ? [...cart, { itemId, quantity }] : [{ itemId, quantity }]);
+      updatingCart(cart.length > 0 ? [...cart, { itemId, quantity }] : [{ itemId, quantity }]);
     }
   };
 
-  const removeItemFromCart = (itemId) => {
-    console.log("Removing", itemId);
+  const removeItemFromCart = (id) => {
+    if (id !== "*") {
+      console.log(id);
+      updatingCart(cart.filter((item) => item.itemId !== id));
+    } else {
+      updatingCart([]);
+      console.log("Eliminando todo");
+    }
   };
 
   const checkDiscount = async (productId) => {
@@ -48,7 +62,7 @@ export const CartCounterProvider = ({ children }) => {
 
     if (!docSnapshot.empty) {
       const item = docSnapshot.docs.data();
-      console.log("Deberia aplicar el siguiente descuento                 :", item.discount);
+      console.log("Deberia aplicar el siguiente descuento:", item.discount);
     }
     return discountToReturn;
   };
@@ -56,8 +70,8 @@ export const CartCounterProvider = ({ children }) => {
   const checkTaxes = async (categoryId) => {
     const taxToReturn = 0;
 
-    const discountsTable = collection(db, "taxes");
-    const docSnapshot = await getDocs(query(discountsTable, where("categorytoapply", "==", categoryId), limit(1)));
+    const taxesTable = collection(db, "taxes");
+    const docSnapshot = await getDocs(query(taxesTable, where("categorytoapply", "==", categoryId), limit(1)));
 
     if (!docSnapshot.empty) {
       const item = docSnapshot.docs.data();
@@ -89,25 +103,14 @@ export const CartCounterProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    let existsCartInLs = localStorage.getItem("cart");
-
-    if (existsCartInLs === null) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    } else {
-      existsCartInLs = JSON.parse(existsCartInLs);
-      if (existsCartInLs.length !== cart.length) {
-        setCart(existsCartInLs);
-      }
-    }
-
     let tempCounter = 0;
     cart.forEach((item) => {
       tempCounter += item.quantity;
     });
     setTotalQty(tempCounter);
-  }, [cart, setCart]);
+  }, [cart]);
 
-  return <CartCounterContext.Provider value={{ cart, totalQty, totalPrice, setCart, addItemToCart, removeItemFromCart, getData }}>{children}</CartCounterContext.Provider>;
+  return <CartCounterContext.Provider value={{ cart, totalQty, totalPrice, setCart, addItemToCart, removeItemFromCart, getData, updatingCart }}>{children}</CartCounterContext.Provider>;
 };
 
 export default CartCounterContext;

@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthenticatorContext from "../../../Context/Authenticator";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { isArrow, isRemoving, isTab } from "../../../Utilities/KeyEvaluator";
-/* import CartCounterContext from "../../Context/CartCounter"; */
+import { db } from "../../../Utilities/Firebase";
 import "./CheckOutView.css";
 
-const CheckOutView = ({ userInfo, setUserInfo }) => {
+import AuthenticatorContext from "../../../Context/Authenticator";
+
+const CheckOutView = ({ userInfo, setUserInfo, setOrderNumber, fullCart, totalPrice }) => {
   const { token } = useContext(AuthenticatorContext);
 
   const navigate = useNavigate();
@@ -21,7 +23,27 @@ const CheckOutView = ({ userInfo, setUserInfo }) => {
       cardcode: form[4].value,
       cardexpdate: form[5].value,
     });
-    navigate("/cart/confirmation");
+
+    purchase();
+  };
+
+  const purchase = async () => {
+    const ordersTable = collection(db, "orders");
+    const data = {
+      soldby: "publisher",
+      purchaseby: userInfo,
+      creationdate: serverTimestamp(),
+      items: fullCart,
+      totalPrice: totalPrice,
+      status: "complete",
+    };
+    console.log(data);
+
+    const docRef = await addDoc(ordersTable, data);
+
+    setOrderNumber(docRef.id);
+
+    navigate("/cart/congratulations");
   };
 
   const handlingName = (e) => {
@@ -76,33 +98,42 @@ const CheckOutView = ({ userInfo, setUserInfo }) => {
   return (
     <div className="CheckOutView_Container container">
       <h3>Formulario de pago</h3>
-      <p>Este es un simulador, solo intenta rellenar esta formulario con informacion ramdom no real para continuar con el proceso</p>
+      <p>Este es un simulador, solo intenta rellenar esta formulario con informacion ramdom no real para continuar con el proceso.</p>
       <form onSubmit={handlingSubmit}>
-        <h4>Informacion Personal:</h4>
-        <div>
-          {token !== null ? (
-            <>
-              <input type={"text"} placeholder="Nombre" value={"Nombre"} required readOnly />
-              <input type={"text"} placeholder="Apellido" value={"Apellido"} required readOnly />
-            </>
-          ) : (
-            <>
-              <input type={"text"} onKeyDown={handlingName} placeholder="Nombre" required />
-              <input type={"text"} onKeyDown={handlingName} placeholder="Apellido" required />
-            </>
-          )}
+        <div className="form-body">
+          <h4>Informacion Personal :</h4>
+          <div>
+            {token !== null ? (
+              <>
+                <input className="input" type={"text"} placeholder="Nombre" value={"Nombre"} required readOnly />
+                <input className="input" type={"text"} placeholder="Apellido" value={"Apellido"} required readOnly />
+              </>
+            ) : (
+              <>
+                <input className="input" type={"text"} onKeyDown={handlingName} placeholder="Nombre" required />
+                <input className="input" type={"text"} onKeyDown={handlingName} placeholder="Apellido" required />
+              </>
+            )}
+          </div>
+          <h4>Informacion de envio :</h4>
+          <div>
+            <input className="input" type={"text"} onKeyDown={handlingAddress} placeholder="Direccion (7 - 50 digitos requeridos)" required />
+          </div>
+          <h4>Informacion de pago :</h4>
+          <div>
+            <input className="input" type={"text"} onKeyDown={handlingCardInfo} placeholder="Numero de tarjeta (16 digitos requerido)" required />
+            <input className="input" type={"text"} onKeyDown={handlingCard3Code} placeholder="Codigo (3 digitos requeridos)" required />
+            <input className="input" type={"date"} onKeyDown={handlingCardExpDate} placeholder="Fecha de expiracion (Mayor a la fecha actual)" required />
+          </div>
+
+          <h4>Carrito :</h4>
+          <div>
+            <p> Precio Total: ${totalPrice}</p>
+          </div>
         </div>
-        <h4>Informacion de envio:</h4>
-        <div>
-          <input type={"text"} onKeyDown={handlingAddress} placeholder="Direccion (7 - 50 digitos requeridos)" required />
+        <div className="form-footer">
+          <button className="btn">Pagar</button>
         </div>
-        <h4>Informacion de pago:</h4>
-        <div>
-          <input type={"text"} onKeyDown={handlingCardInfo} placeholder="Numero de tarjeta (16 digitos requerido)" required />
-          <input type={"text"} onKeyDown={handlingCard3Code} placeholder="Codigo (3 digitos requeridos)" required />
-          <input type={"date"} onKeyDown={handlingCardExpDate} placeholder="Fecha de expiracion (Mayor a la fecha actual)" required />
-        </div>
-        <button>Confirmar Pago</button>
       </form>
     </div>
   );
