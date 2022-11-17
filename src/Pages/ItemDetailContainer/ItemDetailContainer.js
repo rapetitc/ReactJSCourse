@@ -14,13 +14,24 @@ import CartCounterContext from "../../Context/CartCounter";
 import BehaviorsContext from "../../Context/Behaviors";
 import ProductTitle from "./ProductTitle/ProductTitle";
 
+const settingItemQuantity = (cart, params) => {
+  let itemInCart = [0, false];
+  if (cart !== undefined) {
+    itemInCart = cart.find((e) => e.itemId === params.id);
+    console.log(itemInCart);
+  }
+  return itemInCart !== undefined ? [itemInCart.quantity, true] : [0, false];
+};
+
 const ItemDetailContainer = () => {
   const params = useParams();
   const [product, setProduct] = useState([]);
-  const [itemQuantity, setIitemQuantity] = useState(0);
 
   const { cart } = useContext(CartCounterContext);
   const { outerWidth } = useContext(BehaviorsContext);
+
+  const itemQuantity = settingItemQuantity(cart, params);
+  console.log(itemQuantity);
 
   const getProducts = async (id) => {
     const docRef = doc(db, "products", id);
@@ -28,12 +39,9 @@ const ItemDetailContainer = () => {
 
     setProduct([{ ...docSnap.data(), id: docSnap.id }]);
   };
-  
+
   useEffect(() => {
     getProducts(params.id);
-
-    const itemInCart = cart.find((e) => e.itemId === params.id);
-    setIitemQuantity(itemInCart !== undefined ? [itemInCart.quantity, true] : [0, false]);
   }, [cart, params.id]);
 
   return (
