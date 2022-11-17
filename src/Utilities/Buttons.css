@@ -1,50 +1,56 @@
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  color: var(--btn-color);
+  color: white;
   font-size: 15px;
   text-align: center;
-  background-color: var(--btn-bg-color);
-  border: 1px solid var(--btn-br-color);
+  text-decoration: none;
+  background-color: gray;
+  border: 1px solid lightgray;
   border-radius: 7px;
   outline: none;
   cursor: pointer;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.btn > svg {
+  margin: -9px;
+  height: 30px;
+  width: 30px;
+}
 .btn:hover {
-  color: var(--hover-btn-color);
-  background-color: var(--hover-btn-bg-color);
-  border-color: var(--hover-btn-br-color);
-}
-.btn:active {
-  color: var(--active-btn-color);
-  background-color: var(--active-btn-bg-color);
-  border-color: var(--active-btn-br-color);
-}
-.btn:disabled {
-  color: var(--disabled-btn-color);
-  background-color: var(--disabled-btn-bg-color);
-  border-color: var(--disabled-btn-br-color);
-}
-
-.btn-color-t {
   color: gray;
   background-color: white;
-  border: 1px solid gray;
+  border-color: black;
 }
-.btn-color-t:hover {
+.btn:active {
   color: white;
   background-color: gray;
   border-color: lightgray;
 }
+.btn:disabled {
+  color: gray;
+  background-color: lightgray;
+  border-color: lightgray;
+}
+
+.btn-color-t {
+  color: gray;
+  background-color: transparent;
+  border: 1px solid gray;
+}
+.btn-color-t:hover {
+  color: white;
+  background-color: transparent;
+  border-color: lightgray;
+}
 .btn-color-t:active {
   color: gray;
-  background-color: white;
+  background-color: transparent;
   border-color: gray;
 }
 .btn-color-t:disabled {
   color: gray;
-  background-color: lightgray;
+  background-color: transparent;
   border-color: lightgray;
 }
 

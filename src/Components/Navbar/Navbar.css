@@ -1,5 +1,78 @@
 .NavBar_Container {
   background-color: #fff159;
+  width: 100%;
+}
+.NavBar_Container > .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.NavBar_Container > .container > .Title_Container {
+  width: 20%;
+}
+.NavBar_Container > .container > .SearchBar_Container {
+  width: 50%;
+}
+.NavBar_Container > .container > .CompactMenuButton_Container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 30%;
+}
+.NavBar_Container > .container > .CompactMenuButton_Container > * {
+  margin: 0 2%;
+}
+
+@media (min-width: 576px) {
+  .NavBar_Container > .container > .SearchBar_Container {
+    width: 60%;
+  }
+  .NavBar_Container > .container > .CompactMenuButton_Container {
+    width: 20%;
+  }
+}
+@media (min-width: 768px) {
+  .NavBar_Container > .container > .SearchBar_Container {
+    width: 65%;
+  }
+  .NavBar_Container > .container > .CompactMenuButton_Container {
+    width: 15%;
+  }
+}
+
+@media (min-width: 992px) {
+  /* .NavBar_Container > .container {
+    justify-content: flex-start;
+  } */
+  .NavBar_Container > .container > .Title_Container {
+    width: 15%;
+  }
+  .NavBar_Container > .container > .SearchBar_Container {
+    width: 50%;
+  }
+  .NavBar_Container > .container > .ShoppingCart_Container {
+    margin-left: 1.5%;
+    margin-right: 5%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .NavBar_Container > .container > .ShoppingCart_Container {
+    margin-left: 1.5%;
+    margin-right: 9%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .NavBar_Container > .container > .ShoppingCart_Container {
+    margin-left: 1.5%;
+    margin-right: 12.5%;
+  }
+}
+
+/* .NavBar_Container {
+  background-color: #fff159;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -41,4 +114,4 @@
   .NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton {
     display: block;
   }
-}
+} */

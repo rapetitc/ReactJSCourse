@@ -1,7 +1,6 @@
 .SearchBar_Container {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
-  width: 50%;
 }
 .SearchBar_Container > form {
   background-color: white;
@@ -9,23 +8,23 @@
   height: 30px;
   max-width: 600px;
   width: 85%;
-  min-width: 225px;
+  min-width: 130px;
   border: 1px solid rgba(155, 155, 155, 0.2);
   border-radius: 3px;
   padding: 5px 10px;
 }
-.SearchBar_Container > form > .searchBar-Input {
+.SearchBar_Container > form > input {
   background-color: white;
   max-width: 570px;
   width: 100%;
-  min-width: 170px;
+  min-width: 100px;
   outline: none;
   border: 0px;
 }
-.SearchBar_Container > form > .searchBar-Input::placeholder {
+.SearchBar_Container > form > input::placeholder {
   color: rgba(155, 155, 155, 0.6);
 }
-.SearchBar_Container > form > .searchBar-Button {
+.SearchBar_Container > form > button {
   background-color: white;
   width: 30px;
   font-size: 16px;
