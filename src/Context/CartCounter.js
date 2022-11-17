@@ -84,18 +84,20 @@ export const CartCounterProvider = ({ children }) => {
     let tempValue = [];
     let tempPrice = 0;
 
-    for (let i = 0; i < cart.length; i++) {
-      const docRef = doc(db, "products", cart[i].itemId);
-      const docSnap = await getDoc(docRef);
+    if (cart.length > 0) {
+      for (let i = 0; i < cart.length; i++) {
+        const docRef = doc(db, "products", cart[i].itemId);
+        const docSnap = await getDoc(docRef);
 
-      const productId = docSnap.id;
-      const product = docSnap.data();
-      const discount = await checkDiscount(productId);
-      const tax = await checkTaxes(productId);
-      const totalUnitPrice = product.price + (product.price - discount) * (tax / 100);
+        const productId = docSnap.id;
+        const product = docSnap.data();
+        const discount = await checkDiscount(productId);
+        const tax = await checkTaxes(productId);
+        const totalUnitPrice = product.price + (product.price - discount) * (tax / 100);
 
-      tempValue.push({ ...product, id: docSnap.id, quantity: cart[i].quantity, discount: discount, tax: tax, totalunitprice: totalUnitPrice });
-      tempPrice += totalUnitPrice * cart[i].quantity;
+        tempValue.push({ ...product, id: docSnap.id, quantity: cart[i].quantity, discount: discount, tax: tax, totalunitprice: totalUnitPrice });
+        tempPrice += totalUnitPrice * cart[i].quantity;
+      }
     }
 
     setTotalPrice(tempPrice);
@@ -104,9 +106,11 @@ export const CartCounterProvider = ({ children }) => {
 
   useEffect(() => {
     let tempCounter = 0;
-    cart.forEach((item) => {
-      tempCounter += item.quantity;
-    });
+    if (cart !== undefined) {
+      cart.forEach((item) => {
+        tempCounter += item.quantity;
+      });
+    }
     setTotalQty(tempCounter);
   }, [cart]);
 

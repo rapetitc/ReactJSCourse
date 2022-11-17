@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Congratulation.css";
 
 import CartCounterContext from "../../../Context/CartCounter";
