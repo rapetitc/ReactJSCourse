@@ -8,11 +8,11 @@ const checkingCartInLS = () => {
   const temp = JSON.parse(localStorage.getItem("cart"));
   if (temp === null) {
     localStorage.setItem("cart", JSON.stringify([]));
+    return [];
   } else {
     return temp;
   }
 };
-
 export const CartCounterProvider = ({ children }) => {
   const [cart, setCart] = useState(checkingCartInLS());
   const [totalQty, setTotalQty] = useState(0);
@@ -23,7 +23,14 @@ export const CartCounterProvider = ({ children }) => {
     setCart(cart);
   };
 
-  const checkingItemIntoCart = (idToCheck) => cart.some((item) => item.itemId === idToCheck);
+  const checkingItemIntoCart = (idToCheck) => {
+    try {
+      let tempItem = cart.some((item) => item.itemId === idToCheck);
+      return tempItem;
+    } catch (error) {
+      return false;
+    }
+  };
 
   const addItemToCart = (itemId, quantity) => {
     if (checkingItemIntoCart(itemId)) {
@@ -46,11 +53,9 @@ export const CartCounterProvider = ({ children }) => {
 
   const removeItemFromCart = (id) => {
     if (id !== "*") {
-      console.log(id);
       updatingCart(cart.filter((item) => item.itemId !== id));
     } else {
       updatingCart([]);
-      console.log("Eliminando todo");
     }
   };
 

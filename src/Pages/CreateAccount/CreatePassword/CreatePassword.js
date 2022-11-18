@@ -7,7 +7,6 @@ const CreatePassword = ({ caStatus }) => {
 
   const handlingSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target[0].value.length);
     if (e.target[0].value.length > 4) {
       localStorage.setItem("caStatus", JSON.stringify({ ...caStatus, p: e.target[0].value }));
       navigate("/create-account");

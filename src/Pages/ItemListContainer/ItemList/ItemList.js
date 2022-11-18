@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import "./ItemList.css";
 
 const ItemList = ({ database }) => {
-
-
   return (
     <div className="ItemList_Container">
       <h2>Productos que te puedan interesar</h2>

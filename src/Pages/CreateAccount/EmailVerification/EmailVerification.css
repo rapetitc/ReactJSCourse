@@ -2,7 +2,7 @@
   background-color: white;
   display: flex;
   flex-wrap: wrap;
-  height: fit-content;
+  height: min-content;
   width: 500px;
   border-radius: 5px;
 }

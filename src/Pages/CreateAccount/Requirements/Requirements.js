@@ -22,7 +22,6 @@ const Requirements = ({ caStatus }) => {
   };
 
   const handlingSubmit = () => {
-    console.log("creando cuenta");
     creatingAccount(db, caStatus).then(() => {
       localStorage.removeItem("caStatus");
       navigate("/create-account/done");

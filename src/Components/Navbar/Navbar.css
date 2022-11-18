@@ -42,76 +42,16 @@
 }
 
 @media (min-width: 992px) {
-  /* .NavBar_Container > .container {
-    justify-content: flex-start;
-  } */
   .NavBar_Container > .container > .Title_Container {
     width: 15%;
   }
   .NavBar_Container > .container > .SearchBar_Container {
     width: 50%;
   }
+  .NavBar_Container > .container > .Menu_Container {
+    margin: 0;
+  }
   .NavBar_Container > .container > .ShoppingCart_Container {
-    margin-left: 1.5%;
-    margin-right: 5%;
+    margin: 0 25px;
   }
 }
-
-@media (min-width: 1200px) {
-  .NavBar_Container > .container > .ShoppingCart_Container {
-    margin-left: 1.5%;
-    margin-right: 9%;
-  }
-}
-
-@media (min-width: 1400px) {
-  .NavBar_Container > .container > .ShoppingCart_Container {
-    margin-left: 1.5%;
-    margin-right: 12.5%;
-  }
-}
-
-/* .NavBar_Container {
-  background-color: #fff159;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-.NavBar_Container > .container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.NavBar_Container > .container > .CompactMenuButton_Container{
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 15%;
-}
-.NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton {
-  background-color: transparent;
-  display: none;
-  justify-content: center;
-  margin: 0 15px 0 10px;
-  outline: none;
-  border: 1px solid transparent;
-}
-.NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton > svg {
-  cursor: pointer;
-  width: 35px;
-  height: 35px;
-}
-.NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton:hover {
-  color: rgb(73, 73, 73);
-  border: 1px solid rgba(211, 211, 211, 0.397);
-  border-radius: 5px;
-}
-.NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton:active {
-  color: gray;
-}
-
-@media (max-width: 992px) {
-  .NavBar_Container > .container > .CompactMenuButton_Container > .compactMenuButton {
-    display: block;
-  }
-} */

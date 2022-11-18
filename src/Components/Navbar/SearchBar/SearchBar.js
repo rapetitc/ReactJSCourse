@@ -4,7 +4,6 @@ import "./SearchBar.css";
 const SearchBar = () => {
   const handlingSubmit = (e) => {
     e.preventDefault();
-    //console.log("Busncando articulo . . .", e.target[0].value);
   };
 
   return (

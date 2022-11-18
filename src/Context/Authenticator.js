@@ -12,7 +12,6 @@ export const AuthenticatorProvider = ({ children }) => {
     getIPAddress();
 
     const checkingExistingLogsInIP = async () => {
-      //console.log("aqui");
       const userlogsTable = collection(db, "userlogs");
       const querySnapshot = await getDocs(query(userlogsTable, where("ip", "==", IP), where("status", "==", "active")));
 
@@ -66,15 +65,12 @@ export const AuthenticatorProvider = ({ children }) => {
     if (!querySnapshot.empty) {
       const results = querySnapshot.docs[0].data();
       logSession(results);
-    } else {
-      console.log("No se encontro un usuario");
     }
   };
 
   const closeSession = async () => {
     const docRef = doc(db, "userlogs", token.tokenid);
-    const docSnap = await updateDoc(docRef, { status: "inactive" });
-    console.log(docSnap);
+    await updateDoc(docRef, { status: "inactive" });
 
     setTimeout(() => {
       localStorage.removeItem("token");

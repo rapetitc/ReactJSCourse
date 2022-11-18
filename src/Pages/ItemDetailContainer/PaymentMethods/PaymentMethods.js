@@ -1,5 +1,5 @@
 import React from "react";
-import "./PaymentMethods.css"
+import "./PaymentMethods.css";
 
 const payments = [
   { title: "Visa", urlImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" },

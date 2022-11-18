@@ -5,7 +5,6 @@ const ImgsPreview = ({ imgs }) => {
   const [currentImage, setCurrentImage] = useState(imgs[0]);
 
   const handlingImgSelection = (index) => {
-    console.log(index);
     setCurrentImage(imgs[index]);
   };
 

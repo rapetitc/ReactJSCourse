@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import "./Utilities/Buttons.css";
 import "./Utilities/Input.css";
-/* Components */
+
 import NavBar from "./Components/Navbar/Navbar";
 import ItemListContainer from "./Pages/ItemListContainer/ItemListContainer";
 import ItemDetailContainer from "./Pages/ItemDetailContainer/ItemDetailContainer";
@@ -13,7 +13,7 @@ import CartView from "./Pages/CartView/CartView";
 import Session from "./Pages/Session/Session";
 import Profile from "./Pages/Profile/Profile";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
-/* Context */
+
 import { CartCounterProvider } from "./Context/CartCounter";
 import { AuthenticatorProvider } from "./Context/Authenticator";
 import { BehaviorsProvider } from "./Context/Behaviors";

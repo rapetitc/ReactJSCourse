@@ -7,7 +7,6 @@ import CartCounterContext from "../../../Context/CartCounter";
 const MainCartView = ({ fullCart, totalPrice, totalQty }) => {
   const { removeItemFromCart } = useContext(CartCounterContext);
 
-
   return (
     <div className="MainCartView_Container">
       <h2>Carrito de compras</h2>

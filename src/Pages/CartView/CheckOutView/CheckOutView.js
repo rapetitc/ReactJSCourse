@@ -37,7 +37,6 @@ const CheckOutView = ({ userInfo, setUserInfo, setOrderNumber, fullCart, totalPr
       totalPrice: totalPrice,
       status: "complete",
     };
-    console.log(data);
 
     const docRef = await addDoc(ordersTable, data);
 
@@ -90,10 +89,6 @@ const CheckOutView = ({ userInfo, setUserInfo, setOrderNumber, fullCart, totalPr
       e.preventDefault();
     }
   };
-  const handlingCardExpDate = (e) => {
-    const key = e.key;
-    console.log(key);
-  };
 
   return (
     <div className="CheckOutView_Container container">
@@ -123,7 +118,7 @@ const CheckOutView = ({ userInfo, setUserInfo, setOrderNumber, fullCart, totalPr
           <div>
             <input className="input" type={"text"} onKeyDown={handlingCardInfo} placeholder="Numero de tarjeta (16 digitos requerido)" required />
             <input className="input" type={"text"} onKeyDown={handlingCard3Code} placeholder="Codigo (3 digitos requeridos)" required />
-            <input className="input" type={"date"} onKeyDown={handlingCardExpDate} placeholder="Fecha de expiracion (Mayor a la fecha actual)" required />
+            <input className="input" type={"date"} placeholder="Fecha de expiracion (Mayor a la fecha actual)" required />
           </div>
 
           <h4>Carrito :</h4>

@@ -18,9 +18,7 @@ const CreateAccount = () => {
     const rLocations = ["/create-account/email-verification", "/create-account/personal-info", "/create-account/create-password", "/create-account/done"];
     let result = false;
     rLocations.forEach((e) => {
-      console.log(e, "=", location, e === location);
       if (e === location) {
-        console.log("si");
         result = true;
       }
     });
@@ -40,14 +38,11 @@ const CreateAccount = () => {
         setCAStatus(tempRequirements);
 
         if (tempRequirements.TaC === false) {
-          console.log("TaC no fue aceptado y mostrando landing page");
           if (currentLocation !== "/create-account/landing") {
             navigate("/create-account/landing");
           }
         } else if (rLocations(currentLocation)) {
-          console.log(currentLocation);
         } else {
-          console.log("TaC fue aceptado y mostrando requirement page");
           if (currentLocation !== "/create-account/requirements") {
             navigate("/create-account/requirements");
           }

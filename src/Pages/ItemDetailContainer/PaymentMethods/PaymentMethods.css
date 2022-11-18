@@ -3,8 +3,6 @@
   flex-wrap: wrap;
   margin: 5px;
   width: 250px;
-  /* min-width: 300px;
-  max-width: 300px; */
 }
 .PaymentMethods_Container > h4 {
   margin: 5px 10px;

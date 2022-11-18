@@ -27,13 +27,10 @@ const Profile = () => {
       creationdate: serverTimestamp(),
       status: "active",
     };
-    addProduct(data).then((productid) => {
-      console.log("Se ha publicado con exito tu producto, este es tu Product ID:", productid);
-    });
+    addProduct(data);
   };
 
   const addProduct = async (data) => {
-    console.log(data);
     const dc = collection(db, "products");
     const docRef = await addDoc(dc, data);
     return docRef.id;
@@ -72,11 +69,6 @@ const Profile = () => {
       e.preventDefault();
     }
   };
-  const handlingCategory = (e) => {
-    const target = e.target;
-    console.log("Category:", target);
-    console.log("Category:", target.value);
-  };
   const handlingPrice = (e) => {
     const key = e.key;
 
@@ -96,10 +88,6 @@ const Profile = () => {
     if (isNaN(key)) {
       e.preventDefault();
     }
-  };
-  const handlingImgs = (e) => {
-    const target = e.target;
-    console.log("imgs:", target);
   };
 
   return (
@@ -126,7 +114,7 @@ const Profile = () => {
                 <label>Description:</label>
                 <textarea class="textarea" placeholder="Describe las caracteristicas tu producto a detalle, asi tu comprador estara al tanto de ello!. (Max 300 letras)" name="" id="" cols="30" rows="2" minlength="50" maxlength="300" onKeyDown={handlingDescription}></textarea>
                 <label>Categoria:</label>
-                <select class="select" name="" id="" required onChange={handlingCategory}>
+                <select class="select" name="" id="" required>
                   <option selected disabled>
                     Selecciona Categoria
                   </option>
@@ -144,7 +132,7 @@ const Profile = () => {
                 <label>Disponibilidad:</label>
                 <input className="input-bt" type="text" placeholder="Disponibilidad" onKeyDown={handlingStock} required />
                 <label>Imagenes:</label>
-                <input className="input-bt" type="text" placeholder="Enlace de las imagenes, (Separa cada url con una coma ',' )." onKeyDown={handlingImgs} required />
+                <input className="input-bt" type="text" placeholder="Enlace de las imagenes, (Separa cada url con una coma ',' )." required />
                 <button className="btn" type="submit">
                   Publicar Producto
                 </button>

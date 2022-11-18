@@ -15,12 +15,13 @@ import BehaviorsContext from "../../Context/Behaviors";
 import ProductTitle from "./ProductTitle/ProductTitle";
 
 const settingItemQuantity = (cart, params) => {
-  let itemInCart = [0, false];
-  if (cart !== undefined) {
-    itemInCart = cart.find((e) => e.itemId === params.id);
-    console.log(itemInCart);
+  try {
+    const tempItem = cart.find((e) => e.itemId === params.id);
+    return [tempItem.quantity, true];
+  } catch (error) {
+    return [0, false];
   }
-  return itemInCart !== undefined ? [itemInCart.quantity, true] : [0, false];
+  /* return tempItem === undefined || tempItem === null ? [0, false] : [tempItem.quantity, true]; */
 };
 
 const ItemDetailContainer = () => {
@@ -31,7 +32,6 @@ const ItemDetailContainer = () => {
   const { outerWidth } = useContext(BehaviorsContext);
 
   const itemQuantity = settingItemQuantity(cart, params);
-  console.log(itemQuantity);
 
   const getProducts = async (id) => {
     const docRef = doc(db, "products", id);
