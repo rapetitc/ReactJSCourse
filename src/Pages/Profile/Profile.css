@@ -15,6 +15,9 @@
   font-size: 26px;
   border-bottom: 1px solid lightgray;
 }
+.Profile_Container > .profile-content > div {
+  width: 100%;
+}
 
 .Profile_Container > .profile-nav {
   background-color: red;

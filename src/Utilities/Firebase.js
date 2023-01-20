@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD_zM6BY2pjkwmQbx4ewgurHcZv_dVpK4k",
@@ -12,4 +13,22 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 export const db = getFirestore(app);
+
+export const storage = getStorage(app);
+
+const storageRef = ref(storage, "images/");
+
+export const uploadImages = (file) => {
+  uploadBytes(storageRef, file).then((snapshot) => {
+    console.log("Uploaded a blob or file!", snapshot);
+  });
+};
+
+
+getDownloadURL(storageRef)
+  .then((url) => {
+    // Insert url into an <img> tag to "download"
+    console.log(url);
+  })

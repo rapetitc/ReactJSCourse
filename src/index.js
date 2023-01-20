@@ -7,11 +7,21 @@ import App from "./App";
 
 import reportWebVitals from "./reportWebVitals";
 
+import { CartCounterProvider } from "./Context/CartCounter";
+import { AuthenticatorProvider } from "./Context/Authenticator";
+import { BehaviorsProvider } from "./Context/Behaviors";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <CartCounterProvider>
+        <AuthenticatorProvider>
+          <BehaviorsProvider>
+            <App />
+          </BehaviorsProvider>
+        </AuthenticatorProvider>
+      </CartCounterProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

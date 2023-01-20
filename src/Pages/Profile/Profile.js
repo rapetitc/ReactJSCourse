@@ -98,13 +98,13 @@ const Profile = () => {
         <>
           <div className="profile-content">
             <h3>Dashboard</h3>
-            <div className="profile-content-status">
+            <div>
               <h4>Estado</h4>
               <div>
                 <p>Contenido de Estado</p>
               </div>
             </div>
-            <div className="profile-content-addproduct">
+            <div>
               <h4>Agrega un producto</h4>
               <form onSubmit={handlingSubmit}>
                 <label>Titulo:</label>
@@ -138,13 +138,13 @@ const Profile = () => {
                 </button>
               </form>
             </div>
-            <div className="profile-content-sales">
+            <div>
               <h4>Ventas</h4>
               <div>
                 <p>Contenido de Ventas</p>
               </div>
             </div>
-            <div className="profile-content-purchases">
+            <div>
               <h4>Compras</h4>
               <div>
                 <p>Contenido de Compras</p>
