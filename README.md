@@ -1,4 +1,4 @@
-# FreeMarket
+# ReactJSCourse
 
 Mi tercer proyecto creado para la cursada de **ReactJS** de **[CODERHOUSE](https://www.coderhouse.com/)**
 
