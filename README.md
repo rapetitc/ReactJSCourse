@@ -18,4 +18,4 @@ Y finalmente tiene la opcion de registrar o iniciar sesion a cuentas ya creadas 
 - Firestore, producto de Firebase, para almacenar datos y desplegarlos en la pagina
 - Iconos de Bootstrapp
 
-Puedes visitar el proyecto completo haciendo [click aqui](https://lambent-sherbet-1333d6.netlify.app/)
+Puedes visitar el proyecto final haciendo yendo a [https://reactjscourse-134a0.web.app/](https://reactjscourse-134a0.web.app/)
