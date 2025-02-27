@@ -20,7 +20,7 @@ export const AuthenticatorProvider = ({ children }) => {
   const [token, setToken] = useState(
     JSON.parse(localStorage.getItem("session"))
   );
-  const { downloadCart } = useContext(CartContext);
+  const { downloadCart, removeCart } = useContext(CartContext);
 
   const logIn = async ({ username, password }) => {
     if (
@@ -63,10 +63,10 @@ export const AuthenticatorProvider = ({ children }) => {
   };
 
   const closeSession = async () => {
-    // TODO Remover tambien el carrito de LS
     await updateDoc(doc(db, "logs", token.id), {
       expiresOn: moment().format(),
     });
+    removeCart()
     localStorage.removeItem("session");
     setToken(null);
   };

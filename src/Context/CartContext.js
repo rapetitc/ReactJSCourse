@@ -3,9 +3,11 @@ import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 import { db } from "../utils/firebase_config";
+import moment from "moment/moment";
 
 const CartContext = createContext();
 
+//FIXME hacerlo funcionar para invitado, y al momento de pagar, pedir registrarse
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")));
   const [detailedCart, setDetailedCart] = useState({});
@@ -53,6 +55,11 @@ export const CartProvider = ({ children }) => {
     setCart(newCart);
   };
 
+  const removeCart = () => {
+    localStorage.removeItem("cart");
+    setCart(null);
+  };
+
   const isItemInCart = (product_id) => {
     const product = cart?.products.find((prod) => prod.id == product_id);
     return product == undefined ? null : product.quantity;
@@ -81,7 +88,10 @@ export const CartProvider = ({ children }) => {
   };
 
   const handlingPay = async () => {
-    const { id } = await addDoc(collection(db, "tickets"), detailedCart);
+    const { id } = await addDoc(collection(db, "tickets"), {
+      ...detailedCart,
+      date: moment().format(),
+    });
 
     for (const product of detailedCart.products) {
       await updateDoc(doc(db, "products", product.id), {
@@ -100,6 +110,7 @@ export const CartProvider = ({ children }) => {
         detailedCart,
         isItemInCart,
         createCart,
+        removeCart,
         getDetailedCart,
         downloadCart,
         handlingPay,
