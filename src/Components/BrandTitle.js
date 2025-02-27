@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import logo from "../media/Mercado-Libre-Logo.png";
+import logo from "../assets/Mercado-Libre-Logo.png";
 
 const BrandTitle = () => {
   return (

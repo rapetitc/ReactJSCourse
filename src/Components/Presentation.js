@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import presentation1 from "../media/presentation1.jpeg";
-import presentation2 from "../media/presentation2.jpeg";
-import presentation3 from "../media/presentation3.jpeg";
-import presentation4 from "../media/presentation4.jpeg";
+import presentation1 from "../assets/presentation1.jpeg";
+import presentation2 from "../assets/presentation2.jpeg";
+import presentation3 from "../assets/presentation3.jpeg";
+import presentation4 from "../assets/presentation4.jpeg";
 
 const presentations = [
   { title: "presentation 1", url: presentation1 },
@@ -33,7 +33,7 @@ const Presentation = () => {
       >
         {presentations.map(({ title, url }, i) => {
           return (
-            <div className="w-full h-[300px]" key={i+title}>
+            <div className="w-full h-[300px]" key={i + title}>
               <img src={url} className="h-full mx-auto" alt={title} />
             </div>
           );
