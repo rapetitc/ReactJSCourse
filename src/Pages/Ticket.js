@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import NavBar from "../Components/Navbar";
 import Footer from "../Components/Footer";
@@ -9,14 +9,16 @@ import moment from "moment";
 
 const Ticket = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [ticket, setTicket] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const getTicket = async () => {
-    //TODO Si el ticket no existe redirigir hacia not found
     const result = await getDoc(doc(db, "tickets", id));
-    setTicket(result.data());
-    setIsLoading(false);
+    if (result.exists()) {
+      setTicket(result.data());
+    } else {
+      navigate("/not-found");
+    }
   };
 
   useEffect(() => {
@@ -32,19 +34,23 @@ const Ticket = () => {
             <h3 className="text-2xl">¡Gracias por tu compra!</h3>
           </div>
           <div>
-            {/* TODO Mejorar el body del ticket */}
             {ticket == null ? (
               <h1>Cargando</h1>
             ) : (
               <>
                 <div className="flex justify-between p-2 text-end">
                   <div>
-                    <p className="p-2">Ticket de compra: {id}</p>
+                    <p className="p-2">
+                      Ticket de compra:{" "}
+                      <span className="font-semibold">{id}</span>
+                    </p>
                   </div>
                   <div>
                     <p className="p-2">
                       Fecha y hora:{" "}
-                      {moment(ticket.date).format("DD/MM/YYYY hh:mm:ss a")}
+                      <span className="font-semibold">
+                        {moment(ticket.date).format("DD/MM/YYYY hh:mm:ss a")}
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -79,8 +85,13 @@ const Ticket = () => {
                     })}
                   </tbody>
                 </table>
-                <div className="p-5 text-end">
-                  <p>Total pagado: ${ticket.total_price}</p>
+                <div className="p-5 me-5 text-end">
+                  <p className="text-lg">
+                    Total pagado:{" "}
+                    <span className="text-xl font-semibold">
+                      ${ticket.total_price}
+                    </span>
+                  </p>
                 </div>
               </>
             )}
