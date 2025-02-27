@@ -10,6 +10,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 import { db } from "../utils/firebase_config";
 import CartContext from "./CartContext";
@@ -21,6 +22,7 @@ export const AuthenticatorProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("session"))
   );
   const { downloadCart, removeCart } = useContext(CartContext);
+  const navigate = useNavigate()
 
   const logIn = async ({ username, password }) => {
     if (
@@ -69,6 +71,7 @@ export const AuthenticatorProvider = ({ children }) => {
     removeCart()
     localStorage.removeItem("session");
     setToken(null);
+    navigate("/")
   };
 
   const isActive = async () => {
