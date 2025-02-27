@@ -7,7 +7,7 @@ const SearchBar = () => {
 
   const handlingSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search?t=${searchFor}`);
+    navigate(`/search?p=${searchFor}`);
   };
 
   return (
@@ -19,10 +19,11 @@ const SearchBar = () => {
         <input
           type="search"
           className="w-[calc(100%-24px)] outline-none"
+          pattern="[a-zA-Z0-9]{3,}"
           onKeyUp={(e) => {
-            // TODO evaluar solo texto y numero
             setSearchFor(e.target.value);
           }}
+          required
           placeholder="Buscar productos, marcas y mas..."
         />
         <button className="cursor-pointer">
