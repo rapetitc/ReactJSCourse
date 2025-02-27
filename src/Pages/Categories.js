@@ -4,7 +4,7 @@ import NavBar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 
 const Categories = () => {
-  //TODO
+  //TODO construir pagina
   return (
     <div className="flex flex-wrap content-between min-h-[100vh]">
       <div className="w-full">

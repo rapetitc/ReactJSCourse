@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const navLinks = [
   { id: 0, title: "Categorias", link: "/categories" },
-  { id: 2, title: "Stream Play", link: "/" }, //TODO URL
-  { id: 2, title: "Music", link: "/" }, //TODO URL
+  { id: 2, title: "Stream Play", link: "/" },
+  { id: 2, title: "Music", link: "/" },
 ];
 
 const Menu = () => {
