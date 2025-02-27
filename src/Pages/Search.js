@@ -6,15 +6,17 @@ import { useSearchParams } from "react-router-dom";
 
 const Search = () => {
   const [searchParams] = useSearchParams();
-  const searchFor = searchParams.get("t");
+  const p = searchParams.get("p"); // Producto
+  const c = searchParams.get("c"); // Categoria
 
-  //TODO
+  //TODO construir pagina
   return (
     <div className="flex flex-wrap content-between min-h-[100vh]">
       <div className="w-full">
         <NavBar />
         <div className="w-[1280px] mx-auto">
-          <p>Buscando: {searchFor}</p>
+          <p>Buscando: {p}</p>
+          <p>Categoria: {c}</p>
         </div>
       </div>
       <Footer />
