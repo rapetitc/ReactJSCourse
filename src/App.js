@@ -1,47 +1,36 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import "./Utilities/Buttons.css";
-import "./Utilities/Input.css";
 
-import NavBar from "./Components/Navbar/Navbar";
-import Footer from "./Components/Footer/Footer";
-
-import ItemListContainer from "./Pages/ItemListContainer/ItemListContainer";
-import ItemDetailContainer from "./Pages/ItemDetailContainer/ItemDetailContainer";
-import Categories from "./Pages/Categories/Categories";
-import Category from "./Pages/Category/Category";
-import CreateAccount from "./Pages/CreateAccount/CreateAccount";
-import CartView from "./Pages/CartView/CartView";
-import Session from "./Pages/Session/Session";
-import Profile from "./Pages/Profile/Profile";
-import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
+import Home from "./Pages/Home";
+import CreateAccount from "./Pages/CreateAccount";
+import LogIn from "./Pages/LogIn";
+import Profile from "./Pages/Profile";
+import Sell from "./Pages/Sell";
+import ItemDetailContainer from "./Pages/ItemDetailContainer";
+import Search from "./Pages/Search";
+import Categories from "./Pages/Categories";
+import Category from "./Pages/Category";
+import Cart from "./Pages/Cart";
+import Ticket from "./Pages/Ticket";
+import NotFoundPage from "./Pages/NotFoundPage";
 
 function App() {
+  // TODO Encerrar enlaces publicos, y privados
   return (
-    <>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<ItemListContainer />}></Route>
-        <Route path="product">
-          <Route path="category">
-            <Route path=":id" element={<Category />}></Route>
-          </Route>
-          <Route path="categories" element={<Categories />}></Route>
-          <Route path=":id" element={<ItemDetailContainer />}></Route>
-        </Route>
-        <Route path="create-account/*" element={<CreateAccount />}></Route>
-        <Route path="session" element={<Session />}></Route>
-        <Route path="profile" element={<Profile />}></Route>
-        <Route path="cart">
-          <Route path="" element={<CartView />}></Route>
-          <Route path="checkout" element={<CartView />}></Route>
-          <Route path="confirmation" element={<CartView />}></Route>
-          <Route path="congratulations" element={<CartView />}></Route>
-        </Route>
-        <Route path="*" element={<NotFoundPage />}></Route>
-      </Routes>
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/create-account/*" element={<CreateAccount />}></Route>
+      <Route path="/login" element={<LogIn />}></Route>
+      <Route path="/profile" element={<Profile />}></Route>
+      <Route path="/sell" element={<Sell />}></Route>
+      <Route path="/product/:id" element={<ItemDetailContainer />}></Route>
+      <Route path="/search" element={<Search />}></Route>
+      <Route path="/categories" element={<Categories />}></Route>
+      <Route path="/category/:id" element={<Category />}></Route>
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/ticket/:id" element={<Ticket />} />
+      <Route path="*" element={<NotFoundPage />}></Route>
+    </Routes>
   );
 }
 
