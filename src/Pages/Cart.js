@@ -16,7 +16,9 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    handler();
+    if (cart !== null) {
+      handler();
+    }
   }, []);
 
   return (
@@ -27,7 +29,7 @@ const Cart = () => {
           <div className="flex flex-col p-4 my-5 rounded-lg bg-gray-200">
             <h3 className="text-2xl">Carrito de compras</h3>
           </div>
-          {cart.products.length > 0 ? (
+          {cart !== null ? (
             isLoading ? (
               "Esta cargando"
             ) : (
