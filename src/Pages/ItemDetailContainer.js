@@ -13,6 +13,7 @@ import PaymentMethods from "../Components/PaymentMethods";
 import ShippingAddress from "../Components/ShippingAddress";
 import CartButtons from "../Components/CartButtons";
 
+//FIXME poder agregar productos al carrito para invitado
 const ItemDetailContainer = () => {
   const { id } = useParams();
   const [loaded, setLoaded] = useState(false);
@@ -38,7 +39,12 @@ const ItemDetailContainer = () => {
             <div>
               <div className="flex items-center gap-2 py-2 px-30">
                 <p>Categoria: </p>
-                <Link className="text-blue-400">{product.category}</Link>
+                <Link
+                  to={`/search?c=${product.category}`}
+                  className="text-blue-400"
+                >
+                  {product.category}
+                </Link>
               </div>
               <div className="flex justify-evenly">
                 <div>
