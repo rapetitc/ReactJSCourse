@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
 import BrandTitle from "../Components/BrandTitle";
@@ -10,16 +10,17 @@ import CreatePassword from "../Components/CreatePassword";
 import Done from "../Components/Done";
 
 const CreateAccount = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     email: "",
     fname: "",
     lname: "",
     age: "",
     password: "",
-    tac: false,
+    roles: ["USER"],
     cart: "",
+    tac: false,
   });
-  const navigate = useNavigate();
 
   const handlingUserInfo = (status) => {
     setUserInfo((data) => {
@@ -44,25 +45,25 @@ const CreateAccount = () => {
         <div className="flex h-max w-[500px] px-5 py-7 bg-white shadow-xl">
           <Routes>
             <Route
-              path="landing"
+              path="/landing"
               element={<Landing handlingUserInfo={handlingUserInfo} />}
             ></Route>
             <Route
-              path="requirements"
+              path="/requirements"
               element={<Requirements userInfo={userInfo} />}
             ></Route>
             <Route
-              path="email-verification"
+              path="/email-verification"
               element={
                 <EmailVerification handlingUserInfo={handlingUserInfo} />
               }
             ></Route>
             <Route
-              path="personal-info"
+              path="/personal-info"
               element={<PersonalInfo handlingUserInfo={handlingUserInfo} />}
             ></Route>
             <Route
-              path="create-password"
+              path="/create-password"
               element={<CreatePassword handlingUserInfo={handlingUserInfo} />}
             ></Route>
             <Route path="done" element={<Done />}></Route>
