@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
+import SessionContext from "../Context/SessionContext";
+import CartContext from "../Context/CartContext";
 import NavBar from "../Components/Navbar";
 import Footer from "../Components/Footer";
-import CartContext from "../Context/CartContext";
 
 const Cart = () => {
+  const { session } = useContext(SessionContext);
   const { cart, detailedCart, getDetailedCart, handlingPay } =
     useContext(CartContext);
   const [isLoading, setIsLoading] = useState(true);
@@ -69,20 +71,31 @@ const Cart = () => {
                 </tbody>
               </table>
               <div className="flex flex-col items-center gap-4 w-[300px] p-5 rounded bg-gray-100">
-                <p className="text-lg">
-                  Total a pagar:{" "}
-                  <span className="font-semibold">
-                    ${detailedCart.total_price}
-                  </span>
-                </p>
-                <button
-                  className="w-full py-2 px-4 rounded bg-blue-400 cursor-pointer"
-                  onClick={() => {
-                    handlingPay();
-                  }}
-                >
-                  Pagar
-                </button>
+                {session != null ? (
+                  <>
+                    <p className="text-lg">
+                      Total a pagar:{" "}
+                      <span className="font-semibold">
+                        ${detailedCart.total_price}
+                      </span>
+                    </p>
+                    <button
+                      className="w-full py-2 px-4 rounded bg-blue-400 cursor-pointer"
+                      onClick={() => {
+                        handlingPay();
+                      }}
+                    >
+                      Pagar
+                    </button>
+                  </>
+                ) : (
+                  <div className="text-center">
+                    <p>Antes de completar</p>
+                    <Link to={"/login"} className="hover:underline">
+                      Iniciar sesion
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           )}
