@@ -1,13 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 
 import CartContext from "../Context/CartContext";
 
+// FIXME Impedir agregar producto publicado por el mismo usuario logueado
 const CartButtons = ({ product_id, stock }) => {
   const { isItemInCart, updateItemInCart } = useContext(CartContext);
   const isItemInCart_ = isItemInCart(product_id);
 
-  const [counter, setCounter] = useState(isItemInCart_ ?? 1);
-  const [itemQuantity, setItemQuantity] = useState(isItemInCart_ ?? 0);
+  const [counter, setCounter] = useState(isItemInCart_ || 1);
+  const [itemQuantity, setItemQuantity] = useState(isItemInCart_ || 0);
 
   const handlingOnChange = (e) => {
     const { value } = e.target;
