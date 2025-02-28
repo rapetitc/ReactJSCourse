@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 
 import { db } from "../utils/firebase_config";
-
 import NavBar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import ImgsPreview from "../Components/ImgsPreview";
@@ -13,17 +12,16 @@ import PaymentMethods from "../Components/PaymentMethods";
 import ShippingAddress from "../Components/ShippingAddress";
 import CartButtons from "../Components/CartButtons";
 
-//FIXME poder agregar productos al carrito para invitado
 const ItemDetailContainer = () => {
   const { id } = useParams();
   const [loaded, setLoaded] = useState(false);
   const [product, setProduct] = useState({});
 
   const getProducts = async (id) => {
-    const docSnap = await getDoc(doc(db, "products", id));
+    const results = await getDoc(doc(db, "products", id));
 
     setLoaded(true);
-    setProduct({ ...docSnap.data(), id: docSnap.id });
+    setProduct({ ...results.data(), id: results.id });
   };
 
   useEffect(() => {
