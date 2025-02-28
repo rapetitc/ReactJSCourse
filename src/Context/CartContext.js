@@ -1,29 +1,43 @@
-import { createContext, useState } from "react";
-import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { db } from "../utils/firebase_config";
+import { doc, getDoc, addDoc, updateDoc, collection } from "firebase/firestore";
 import moment from "moment/moment";
+
+import SessionContext from "./SessionContext";
+import { db } from "../utils/firebase_config";
 
 const CartContext = createContext();
 
-//FIXME hacerlo funcionar para invitado, y al momento de pagar, pedir registrarse
+const emptyCartTemplate = { id: "", products: [] };
+const retrieveCartFromLS = () => {
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  if (cart !== null) return cart;
+  localStorage.setItem("cart", JSON.stringify(emptyCartTemplate));
+  return emptyCartTemplate;
+};
+
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")));
-  const [detailedCart, setDetailedCart] = useState({});
   const navigate = useNavigate();
+  const { session, setCartFunction } = useContext(SessionContext);
+  const [cart, setCart] = useState(retrieveCartFromLS());
+  const [detailedCart, setDetailedCart] = useState({});
 
   const createCart = async () => {
-    const { id } = await addDoc(collection(db, "carts"), emptyCart);
     const emptyCart = { products: [], lastModified: new Date() };
+    const { id } = await addDoc(collection(db, "carts"), emptyCart);
     return id;
   };
 
-  const downloadCart = async (cid) => {
-    const data = await getDoc(doc(db, "carts", cid));
-    const cart = { id: data.id, ...data.data() };
-    localStorage.setItem("cart", JSON.stringify(cart));
-    setCart(cart);
+  const retrieveCartFromDB = async (cart_id) => {
+    const results = await getDoc(doc(db, "carts", cart_id));
+    const data = results.data();
+    if (data.products.length == 0) {
+      await updateCart(cart_id, cart.products);
+    } else {
+      const updated_cart = { id: results.id, ...data };
+      localStorage.setItem("cart", JSON.stringify(updated_cart));
+      setCart(updated_cart);
+    }
   };
 
   const getDetailedCart = async () => {
@@ -48,22 +62,20 @@ export const CartProvider = ({ children }) => {
     setDetailedCart({ products: products, total_price });
   };
 
-  const updateCart = async (products) => {
-    const newCart = { id: cart.id, products, lastModified: new Date() };
-    await updateDoc(doc(db, "carts", cart.id), { products });
-    localStorage.setItem("cart", JSON.stringify(newCart));
-    setCart(newCart);
+  const updateCart = async (cart_id, products) => {
+    const new_cart = { id: cart_id, products, lastModified: new Date() };
+    if (session) await updateDoc(doc(db, "carts", cart_id), { products });
+    localStorage.setItem("cart", JSON.stringify(new_cart));
+    setCart(new_cart);
   };
 
-  const removeCart = () => {
-    localStorage.removeItem("cart");
-    setCart(null);
+  const resetCart = () => {
+    localStorage.setItem("cart", JSON.stringify(emptyCartTemplate));
+    setCart(emptyCartTemplate);
   };
 
-  const isItemInCart = (product_id) => {
-    const product = cart?.products.find((prod) => prod.id == product_id);
-    return product == undefined ? null : product.quantity;
-  };
+  const isItemInCart = (product_id) =>
+    cart.products.find((prod) => prod.id == product_id)?.quantity || false;
 
   const updateItemInCart = async (product_id, quantity) => {
     let products = [...cart.products];
@@ -81,7 +93,7 @@ export const CartProvider = ({ children }) => {
       }
     }
     try {
-      await updateCart(products);
+      await updateCart(cart.id, products);
     } catch (error) {
       console.error("Error al actualizar producto en el carrito", error);
     }
@@ -91,6 +103,7 @@ export const CartProvider = ({ children }) => {
     const { id } = await addDoc(collection(db, "tickets"), {
       ...detailedCart,
       date: moment().format(),
+      buyer: session.user.id,
     });
 
     for (const product of detailedCart.products) {
@@ -99,9 +112,13 @@ export const CartProvider = ({ children }) => {
           detailedCart.products[0].stock - detailedCart.products[0].quantity,
       });
     }
-    await updateCart([]);
+    await updateCart(cart.id, []);
     navigate(`/ticket/${id}`);
   };
+
+  useEffect(() => {
+    setCartFunction({ retrieveCartFromDB, resetCart });
+  }, [cart]);
 
   return (
     <CartContext.Provider
@@ -110,9 +127,7 @@ export const CartProvider = ({ children }) => {
         detailedCart,
         isItemInCart,
         createCart,
-        removeCart,
         getDetailedCart,
-        downloadCart,
         handlingPay,
         updateItemInCart,
       }}
