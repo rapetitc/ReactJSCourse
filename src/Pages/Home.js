@@ -1,5 +1,3 @@
-import React from "react";
-
 import NavBar from "../Components/Navbar";
 import ItemListContainer from "../Components/ItemListContainer";
 import Presentation from "../Components/Presentation";

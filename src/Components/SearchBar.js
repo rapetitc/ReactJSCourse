@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-  const [searchFor, setSearchFor] = useState("");
   const navigate = useNavigate();
+  const [searchFor, setSearchFor] = useState("");
 
   const handlingSubmit = (e) => {
     e.preventDefault();

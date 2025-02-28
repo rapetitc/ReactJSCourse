@@ -1,5 +1,3 @@
-import React from "react";
-
 import BrandTitle from "./BrandTitle";
 import SearchBar from "./SearchBar";
 import Menu from "./Menu";

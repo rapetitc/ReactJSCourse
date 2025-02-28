@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import presentation1 from "../assets/presentation1.jpeg";
 import presentation2 from "../assets/presentation2.jpeg";

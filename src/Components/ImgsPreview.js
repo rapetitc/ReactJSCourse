@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ImgsPreview = ({ imgs }) => {
   const [currentImage, setCurrentImage] = useState(imgs[0]);

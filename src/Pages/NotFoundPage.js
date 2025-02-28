@@ -1,12 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 import NavBar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 
+// TODO Mejorar UI
 const NotFoundPage = () => {
-  // TODO Mejorar UI
-
   return (
     <div className="flex flex-wrap content-between min-h-[100vh]">
       <div className="w-full">

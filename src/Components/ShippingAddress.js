@@ -1,5 +1,3 @@
-import React from "react";
-
 const ShippingAddress = () => {
   return (
     <div className="flex gap-2">

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getDocs, collection, query, limit } from "firebase/firestore";
-import { db } from "../utils/firebase_config";
 
+import { db } from "../utils/firebase_config";
 import ItemList from "./ItemList";
 
 const ItemListContainer = () => {
