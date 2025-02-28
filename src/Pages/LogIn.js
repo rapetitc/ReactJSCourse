@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import AuthenticatorContext from "../Context/AuthenticatorContext";
+import SessionContext from "../Context/SessionContext";
 import BrandTitle from "../Components/BrandTitle";
 
 const LogIn = () => {
-  const { logIn } = useContext(AuthenticatorContext);
   const navigate = useNavigate();
+  const { logIn } = useContext(SessionContext);
 
   const handlerSubmit = async (e) => {
     e.preventDefault();

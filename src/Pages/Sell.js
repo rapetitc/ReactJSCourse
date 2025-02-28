@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 
+import { db } from "../utils/firebase_config";
+import SessionContext from "../Context/SessionContext";
 import NavBar from "../Components/Navbar";
 import Footer from "../Components/Footer";
-import { db } from "../utils/firebase_config";
-import AuthenticatorContext from "../Context/AuthenticatorContext";
 
+//TODO Mejorar UI
 const Sell = () => {
-  const { token } = useContext(AuthenticatorContext);
   const navigate = useNavigate();
+  const { session } = useContext(SessionContext);
 
   const handlingSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ const Sell = () => {
       stock: parseInt(form[5].value),
       rating: 0,
       images: [form[6].value],
-      publisher: token.user,
+      publisher: session.user,
       creationdate: new Date(),
       status: "active",
     };

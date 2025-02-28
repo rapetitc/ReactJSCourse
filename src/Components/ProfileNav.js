@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import AuthenticatorContext from "../Context/AuthenticatorContext";
+import SessionContext from "../Context/SessionContext";
 
 const ProfileNav = () => {
-  const { token, closeSession } = useContext(AuthenticatorContext);
+  const { session, closeSession } = useContext(SessionContext);
 
   return (
     <div className="flex gap-6 items-center">
-      {token === null ? (
+      {session === null ? (
         <>
           <Link to="/create-account" className="hover:underline">
             Registrarse
@@ -24,7 +24,7 @@ const ProfileNav = () => {
           </Link>
           <div className="flex flex-col hover:bg-white group">
             <button className="flex items-center gap-2 px-3 py-1 rounded bg-white hover:cursor-pointer">
-              ¡Bienvenido {token.user.fname}!{" "}
+              ¡Bienvenido {session.user.fname}!{" "}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"

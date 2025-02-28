@@ -5,18 +5,18 @@ import "https://unpkg.com/@tailwindcss/browser@4.0.8/dist/index.global.js";
 
 import App from "./App";
 import { CartProvider } from "./Context/CartContext";
-import { AuthenticatorProvider } from "./Context/AuthenticatorContext";
+import { SessionProvider } from "./Context/SessionContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <CartProvider>
-        <AuthenticatorProvider>
+      <SessionProvider>
+        <CartProvider>
           <App />
-        </AuthenticatorProvider>
-      </CartProvider>
+        </CartProvider>
+      </SessionProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
