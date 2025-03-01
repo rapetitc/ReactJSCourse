@@ -32,6 +32,7 @@ export const CartProvider = ({ children }) => {
     const results = await getDoc(doc(db, "carts", cart_id));
     const data = results.data();
     if (data.products.length == 0) {
+      //FIXME Evaluar si algunos de los productos agregados en el carrito de invitado fue publicado por el usuario logueado
       await updateCart(cart_id, cart.products);
     } else {
       const updated_cart = { id: results.id, ...data };
@@ -52,6 +53,7 @@ export const CartProvider = ({ children }) => {
         title: data.title,
         brand: data.brand,
         price: data.price,
+        images: data.images,
         quantity: cart.products[i].quantity,
         stock: data.stock,
       };
