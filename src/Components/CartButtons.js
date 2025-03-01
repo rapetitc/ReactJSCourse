@@ -2,8 +2,7 @@ import { useState, useContext } from "react";
 
 import CartContext from "../Context/CartContext";
 
-// FIXME Impedir agregar producto publicado por el mismo usuario logueado
-const CartButtons = ({ product_id, stock }) => {
+const CartButtons = ({ product_id, stock, disabled }) => {
   const { isItemInCart, updateItemInCart } = useContext(CartContext);
   const isItemInCart_ = isItemInCart(product_id);
 
@@ -34,7 +33,7 @@ const CartButtons = ({ product_id, stock }) => {
   };
 
   return (
-    <div className=" p-1 my-3">
+    <div className="p-1 my-3">
       <p className="p-1 text-xs text-gray-900">
         Disponibilidad de{" "}
         <span className="font-semibold">{stock} unidades</span>
@@ -48,6 +47,7 @@ const CartButtons = ({ product_id, stock }) => {
               if (counter > 1) return setCounter(counter - 1);
               setCounter(0);
             }}
+            disabled={disabled}
           >
             <svg fill="currentColor" className="size-5" viewBox="0 0 16 16">
               <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
@@ -59,6 +59,7 @@ const CartButtons = ({ product_id, stock }) => {
             value={counter}
             onChange={handlingOnChange}
             onBlur={handlingOnBlur}
+            disabled={disabled}
           />
           <button
             className="flex justify-center items-center w-full rounded bg-white cursor-pointer"
@@ -66,6 +67,7 @@ const CartButtons = ({ product_id, stock }) => {
               if (counter < stock) return setCounter(counter + 1);
               setCounter(stock);
             }}
+            disabled={disabled}
           >
             <svg fill="currentColor" className="size-5" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
@@ -91,11 +93,16 @@ const CartButtons = ({ product_id, stock }) => {
           onClick={() => {
             handlingItemQuantity(true);
           }}
-          disabled={counter == 0 || counter == itemQuantity}
+          disabled={counter == 0 || counter == itemQuantity || disabled}
         >
           Agregar al carrito
         </button>
       </div>
+      {disabled ? (
+        <p className="text-xs text-center">
+          ¡Los botones estan deshabilitados!
+        </p>
+      ) : null}
     </div>
   );
 };
