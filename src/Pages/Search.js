@@ -3,11 +3,9 @@ import { useSearchParams } from "react-router-dom";
 import { getDocs, collection, query, where } from "firebase/firestore";
 
 import { db } from "../utils/firebase_config";
-import NavBar from "../Components/Navbar";
-import Footer from "../Components/Footer";
 import ItemList from "../Components/ItemList";
 
-// TODO Realizar Filtro UI
+// TODO IMPORTANTE !! Realizar Filtro UI
 const Search = () => {
   const [searchParams] = useSearchParams();
   const p = searchParams.get("p"); // Producto
@@ -43,31 +41,25 @@ const Search = () => {
   }, [p]);
 
   return (
-    <div className="flex flex-wrap content-between min-h-[100vh]">
-      <div className="w-full">
-        <NavBar />
-        <div className="w-[1280px] mx-auto">
-          <div className="p-1 ms-5 my-2">
-            <p>
-              Producto relacionados a:{" "}
-              <span className="px-1 italic font-semibold">{p}</span>
-            </p>
-          </div>
-          <div className="flex gap-1 w-full">
-            <div className="w-3/12 p-1 m-1 rounded bg-gray-100"></div>
-            <div className="w-9/12 p-1 m-1 rounded bg-gray-100">
-              <div className="flex flex-wrap gap-3">
-                {products.length > 0
-                  ? products.map((product, i) => (
-                      <ItemList product={product} key={i} />
-                    ))
-                  : "No se encontraron productos"}
-              </div>
-            </div>
+    <div className="w-[1280px] mx-auto">
+      <div className="p-1 ms-5 my-2">
+        <p>
+          Producto relacionados a:{" "}
+          <span className="px-1 italic font-semibold">{p}</span>
+        </p>
+      </div>
+      <div className="flex gap-1 w-full">
+        <div className="w-3/12 p-1 m-1 rounded bg-gray-100"></div>
+        <div className="w-9/12 p-1 m-1 rounded bg-gray-100">
+          <div className="flex flex-wrap gap-3">
+            {products.length > 0
+              ? products.map((product, i) => (
+                  <ItemList product={product} key={i} />
+                ))
+              : "No se encontraron productos"}
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

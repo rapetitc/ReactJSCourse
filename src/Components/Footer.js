@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="flex justify-center w-full py-6 bg-yellow-200">
+    <footer className="flex justify-center w-full py-6 bg-yellow-200">
       <h2>
         Diseñado y desarrollado por{" "}
         <a
@@ -10,7 +10,7 @@ const Footer = () => {
           @rapetitc
         </a>
       </h2>
-    </div>
+    </footer>
   );
 };
 
