@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 // TODO Evaluar mas tarde agregar el uso del filtro Departamento
@@ -6,7 +6,7 @@ const SearchBar = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const p = searchParams.get("p"); // Producto
-  const [searchFor, setSearchFor] = useState(p || "");
+  const [searchFor, setSearchFor] = useState("");
 
   const handingOnChange = (e) => {
     const { value } = e.target;
@@ -25,8 +25,11 @@ const SearchBar = () => {
     e.preventDefault();
     const search = searchFor.trim();
     setSearchFor(search);
-    if (search.length > 3) navigate(`/search?p=${search}`);
+    if (search.length > 2) navigate(`/search?p=${search}`);
   };
+  useEffect(() => {
+    setSearchFor(p || "");
+  }, [p]);
 
   return (
     <div className="w-full">
