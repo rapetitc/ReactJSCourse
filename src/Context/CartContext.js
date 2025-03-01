@@ -23,7 +23,7 @@ export const CartProvider = ({ children }) => {
   const [detailedCart, setDetailedCart] = useState({});
 
   const createCart = async () => {
-    const emptyCart = { products: [], lastModified: new Date() };
+    const emptyCart = { products: [], lastModified: moment().format() };
     const { id } = await addDoc(collection(db, "carts"), emptyCart);
     return id;
   };
@@ -63,7 +63,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const updateCart = async (cart_id, products) => {
-    const new_cart = { id: cart_id, products, lastModified: new Date() };
+    const new_cart = { id: cart_id, products, lastModified: moment().format() };
     if (session) await updateDoc(doc(db, "carts", cart_id), { products });
     localStorage.setItem("cart", JSON.stringify(new_cart));
     setCart(new_cart);
