@@ -54,7 +54,7 @@ const PublishedProducts = () => {
               return (
                 <tr className="bg-red-100" key={i}>
                   <td className="p-1 ">
-                    <Link>{data.title}</Link>
+                    <Link to={`/product/${data.id}`}>{data.title}</Link>
                   </td>
                   <td className="p-1 ">${data.price}</td>
                 </tr>
@@ -67,6 +67,7 @@ const PublishedProducts = () => {
   );
 };
 
+//TODO Conectar UI con DB
 const Purchases = () => {
   const { session } = useContext(SessionContext);
   const [data, setData] = useState([]);

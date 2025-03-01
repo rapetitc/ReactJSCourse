@@ -16,6 +16,7 @@ const StarNoFilled = (
   </svg>
 );
 
+//TODO Hacer conexion con la DB
 const RatingCalculator = ({ value }) => {
   let stars = [];
   for (let i = 0; i < 5; i++) {

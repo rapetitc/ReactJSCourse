@@ -7,6 +7,7 @@ import { db } from "../utils/firebase_config";
 import NavBar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 
+//TODO Mejorar UI
 const Ticket = () => {
   const navigate = useNavigate();
   const { id } = useParams();
