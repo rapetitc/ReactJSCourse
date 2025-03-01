@@ -4,8 +4,8 @@ const ItemList = ({ product }) => {
   return (
     <div className="w-50 bg-white">
       <Link to={"/product/" + product.id}>
-        <div className="size-50">
-          <img src={product.images[0]} alt={product.title} />
+        <div className="flex justify-center items-center size-50">
+          <img src={product.images[0]} className="max-h-full max-w-full" alt={product.title} />
         </div>
         <div className="w-full py-1 px-3">
           <h5 className="my-1 text-sm line-clamp-2">{product.title}</h5>

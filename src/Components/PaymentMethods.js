@@ -18,7 +18,7 @@ const payments = [
 
 const PaymentMethods = () => {
   return (
-    <div className="my-2">
+    <div className="p-1 my-1">
       <h4>Hasta 48 cuotas</h4>
       <div className="flex gap-2">
         {payments.map((element, index) => (

@@ -1,6 +1,6 @@
 const ShippingAddress = () => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 p-1 my-1">
       <div className="mt-1">
         <svg
           fill="currentColor"
