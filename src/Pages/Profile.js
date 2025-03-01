@@ -4,11 +4,10 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 
 import { db } from "../utils/firebase_config";
 import SessionContext from "../Context/SessionContext";
-import NavBar from "../Components/Navbar";
-import Footer from "../Components/Footer";
 
 const PublishedProducts = () => {
   const { session } = useContext(SessionContext);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [data, setData] = useState([]);
 
   const getPublishedProducts = async () => {
@@ -24,6 +23,7 @@ const PublishedProducts = () => {
         products.push({ id: product.id, ...product.data() });
       });
     }
+    setIsLoaded(true);
     setData(products);
   };
 
@@ -32,44 +32,63 @@ const PublishedProducts = () => {
   }, []);
 
   return (
-    <div>
-      <div className="flex justify-between py-1 px-2">
-        <h4 className="text-lg font-semibold">Productos publicados</h4>
-        <Link to={"/sell"} className="px-1 hover:underline">
-          Vender
-        </Link>
+    <div className="flex flex-col gap-2 w-full bg-gray-200 p-2 rounded">
+      <div className="py-2">
+        <h4 className="text-xl text-center text-gray-800 font-semibold">
+          Productos publicados
+        </h4>
       </div>
-      {data.length == 0 ? (
-        <div>Sin productos publicados</div>
+      {isLoaded ? (
+        data.length == 0 ? (
+          <div className="flex justify-center p-1">
+            <p>Sin productos publicados</p>
+          </div>
+        ) : (
+          <table className="w-full rounded-lg bg-white overflow-hidden">
+            <thead>
+              <tr>
+                <td className="ps-15 p-2 font-semibold">Producto</td>
+                <td className="p-2 text-center font-semibold">Precio</td>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((data, i) => {
+                return (
+                  <tr
+                    className={i % 2 == 0 ? "bg-yellow-100" : "bg-yellow-200"}
+                    key={i}
+                  >
+                    <td>
+                      <Link
+                        to={`/product/${data.id}`}
+                        className="flex items-center gap-3 p-1 text-lg font-semibold"
+                      >
+                        <div className="flex justify-center items-center size-10 rounded bg-white  overflow-hidden">
+                          <img
+                            src={data.images[0]}
+                            className="max-w-full max-h-full"
+                          />
+                        </div>
+                        <p>{data.title}</p>
+                      </Link>
+                    </td>
+                    <td className="text-center">${data.price}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )
       ) : (
-        <table className="w-full bg-white">
-          <thead className="">
-            <tr>
-              <td className="p-1 font-semibold">Producto</td>
-              <td className="p-1 font-semibold">Precio</td>
-            </tr>
-          </thead>
-          <tbody className="">
-            {data.map((data, i) => {
-              return (
-                <tr className="bg-red-100" key={i}>
-                  <td className="p-1 ">
-                    <Link to={`/product/${data.id}`}>{data.title}</Link>
-                  </td>
-                  <td className="p-1 ">${data.price}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <p className="text-center">Cargando. . . </p>
       )}
     </div>
   );
 };
 
-//TODO Conectar UI con DB
 const Purchases = () => {
   const { session } = useContext(SessionContext);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [data, setData] = useState([]);
 
   const getPublishedProducts = async () => {
@@ -83,6 +102,7 @@ const Purchases = () => {
         purchases.push({ id: purchase.id, ...purchase.data() });
       });
     }
+    setIsLoaded(true);
     setData(purchases);
   };
 
@@ -91,55 +111,59 @@ const Purchases = () => {
   }, []);
 
   return (
-    <div>
-      <div className="flex justify-between py-1 px-2">
-        <h4 className="text-lg font-semibold">Mis compras</h4>
+    <div className="flex flex-col gap-2 w-full bg-gray-200 p-2 rounded">
+      <div className="py-2">
+        <h4 className="text-xl text-center text-gray-800 font-semibold">
+          Mis compras
+        </h4>
       </div>
-      {data.length == 0 ? (
-        <div>Sin compras realizadas</div>
+      {isLoaded ? (
+        data.length == 0 ? (
+          <div className="flex justify-center p-1">
+            <p>Sin compras</p>
+          </div>
+        ) : (
+          <table className="w-full rounded-lg bg-white overflow-hidden">
+            <thead>
+              <tr>
+                <td className="ps-15 p-2 font-semibold">Compras</td>
+                <td className="p-2 text-center font-semibold">Total pagado</td>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((doc, i) => {
+                return (
+                  <tr
+                    className={i % 2 == 0 ? "bg-yellow-100" : "bg-yellow-200"}
+                    key={i}
+                  >
+                    <td className="p-1">
+                      <Link to={`/ticket/${doc.id}`}>{doc.id}</Link>
+                    </td>
+                    <td className="p-1 text-center">${doc.total_price}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )
       ) : (
-        <table className="w-full bg-white">
-          <thead className="">
-            <tr>
-              <td className="p-1 font-semibold">Ticket</td>
-              <td className="p-1 font-semibold">Total pagado</td>
-            </tr>
-          </thead>
-          <tbody className="">
-            <tr className="bg-red-100">
-              <td className="p-1 ">
-                <Link>GYSGW459GTG912GOLAS25FU</Link>
-              </td>
-              <td className="p-1 ">$150</td>
-            </tr>
-          </tbody>
-        </table>
+        <p className="text-center">Cargando. . . </p>
       )}
     </div>
   );
 };
 
-//TODO Mejorar UI de Mis Compras y Productos Publicados
 const Profile = () => {
   return (
-    <div className="flex flex-wrap content-between min-h-[100vh]">
-      <div className="w-full">
-        <NavBar />
-        <div className="w-[1280px] mx-auto">
-          <div className="flex flex-col p-4 my-5 rounded-lg bg-gray-200">
-            <h3 className="text-2xl">Tu perfil</h3>
-          </div>
-          <div className="flex w-full p-5">
-            <div className="w-full p-4">
-              <PublishedProducts />
-            </div>
-            <div className="w-full p-4">
-              <Purchases />
-            </div>
-          </div>
-        </div>
+    <div className="w-[1280px] mx-auto">
+      <div className="flex flex-col p-4 my-5 rounded-lg bg-gray-200">
+        <h3 className="text-2xl">Tu perfil</h3>
       </div>
-      <Footer />
+      <div className="flex gap-5 w-full p-5">
+        <PublishedProducts />
+        <Purchases />
+      </div>
     </div>
   );
 };
