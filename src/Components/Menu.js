@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const navLinks = [
-  { id: 0, title: "Categorias", link: "/categories" },
+  { id: 0, title: "Departamentos", link: "/" },
   { id: 2, title: "Stream Play", link: "/" },
   { id: 2, title: "Music", link: "/" },
 ];
