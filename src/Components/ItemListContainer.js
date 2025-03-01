@@ -6,6 +6,7 @@ import ItemList from "./ItemList";
 
 const ItemListContainer = () => {
   const [data, setData] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const getProducts = async () => {
     const querySnapshot = await getDocs(
@@ -17,6 +18,7 @@ const ItemListContainer = () => {
       products.push({ id: element.id, ...element.data() });
     });
 
+    setIsLoaded(true);
     setData(products);
   };
 
@@ -29,12 +31,16 @@ const ItemListContainer = () => {
       <h3 className="ms-7 my-5 text-2xl font-medium">
         Porque puede que te interese
       </h3>
-      {data.length > 0 ? (
-        <div className="flex gap-3 my-2">
-          {data.map((product, index) => {
-            return <ItemList product={product} key={index} />;
-          })}
-        </div>
+      {isLoaded ? (
+        data.length > 0 ? (
+          <div className="flex gap-3 my-2">
+            {data.map((product, index) => {
+              return <ItemList product={product} key={index} />;
+            })}
+          </div>
+        ) : (
+          "Sin productos para cargar"
+        )
       ) : (
         <div className="flex gap-3 my-2">
           <div className="w-50 bg-white">
