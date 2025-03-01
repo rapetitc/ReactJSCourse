@@ -11,8 +11,8 @@ const PersonalInfo = ({ handlingUserInfo }) => {
       Number(e.target[2].value) !== NaN
     ) {
       handlingUserInfo({
-        fname: e.target[0].value,
-        lname: e.target[1].value,
+        first_name: e.target[0].value,
+        last_name: e.target[1].value,
         age: e.target[2].value,
       });
       navigate("/create-account/requirements");

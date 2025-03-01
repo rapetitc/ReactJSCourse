@@ -9,16 +9,18 @@ import PersonalInfo from "../Components/PersonalInfo";
 import CreatePassword from "../Components/CreatePassword";
 import Done from "../Components/Done";
 
+// TODO Cambiar edad por fecha de nacimiento
 const CreateAccount = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     email: "",
-    fname: "",
-    lname: "",
+    first_name: "",
+    last_name: "",
     age: "",
     password: "",
     roles: ["USER"],
     cart: "",
+    favorite_products: [],
     tac: false,
   });
 

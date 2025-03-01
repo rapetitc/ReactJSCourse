@@ -74,7 +74,7 @@ const Requirements = ({ userInfo }) => {
               onClick={() => {
                 navigate("/create-account/personal-info");
               }}
-              disabled={userInfo.fname.length > 3 || userInfo.lname.length > 3}
+              disabled={userInfo.first_name.length > 3 || userInfo.last_name.length > 3}
             >
               Validar
             </button>

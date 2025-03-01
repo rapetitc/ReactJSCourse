@@ -24,7 +24,7 @@ const ProfileNav = () => {
           </Link>
           <div className="flex flex-col hover:bg-white group">
             <button className="flex items-center gap-2 px-3 py-1 rounded bg-white hover:cursor-pointer">
-              ¡Bienvenido {session.user.fname}!{" "}
+              ¡Bienvenido {session.user.first_name}!{" "}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
