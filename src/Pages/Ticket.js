@@ -5,7 +5,7 @@ import moment from "moment";
 
 import { db } from "../utils/firebase_config";
 
-//TODO Mejorar UI
+//TODO IMPORTANTE !! Mejorar UI
 const Ticket = () => {
   const navigate = useNavigate();
   const { id } = useParams();

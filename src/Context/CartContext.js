@@ -79,6 +79,7 @@ export const CartProvider = ({ children }) => {
   const isItemInCart = (product_id) =>
     cart.products.find((prod) => prod.id == product_id)?.quantity || false;
 
+  //TODO Evaluar si alguno de los productos en el carrito le pertenece al usuario logueado antes de procesar la compra
   const updateItemInCart = async (product_id, quantity) => {
     let products = [...cart.products];
 
