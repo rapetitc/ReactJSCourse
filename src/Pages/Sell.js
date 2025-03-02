@@ -25,6 +25,7 @@ const Sell = () => {
       stock: parseInt(form[5].value),
       rating: 0,
       images: form[6].value.split("; "),
+      condition: form[7].value,
       publisher: session.user.id,
       keywords: title.toLowerCase().split(" "),
       creationdate: moment().format(),
@@ -35,7 +36,7 @@ const Sell = () => {
       const { id } = await addDoc(collection(db, "products"), product);
       navigate(`/product/${id}`);
     } catch (error) {
-      console.error("Error al crear product", error);
+      console.error("Error al crear producto", error);
     }
   };
 
@@ -107,10 +108,18 @@ const Sell = () => {
             <Input
               type="text"
               label="Imagenes del producto"
-              className="col-span-3"
+              className="col-span-2"
               id="images"
               placeholder="Adjunta los enlaces y separalos con un punto y coma mas un espacio '; '"
               pattern="https?:\/\/[a-z0-9\.-  ]+\.[a-z0-9]{2,3}\/.+"
+              required
+            />
+            
+            <Input
+              type="select"
+              label="Condicion del producto"
+              id="condition"
+              options={["Nuevo", "Usado"]}
               required
             />
           </div>
