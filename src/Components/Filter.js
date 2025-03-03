@@ -1,39 +1,41 @@
 import { useNavigate } from "react-router-dom";
 
-const Filter = ({ sp, filters }) => {
+const Filter = ({ searchParams, filters }) => {
   const navigate = useNavigate();
 
-  const addFilter = (filter, state) => {
-    let search = "";
-
-    Object.entries(sp).forEach(([key, value], i) => {
-      if (i > 0) search += "&";
-      search += `${key}=${value}`;
+  const addSearchParam = (searchParamToAdd) => {
+    searchParamToAdd.forEach(([key, value]) => {
+      searchParams.set(key, value);
     });
-
-    if (search.length > 0) search += `&${filter}=${state}`;
-    else search += `${filter}=${state}`;
-
-    navigate(`/search?${search}`);
+    navigate(`/search?${searchParams.toString()}`);
   };
 
-  const removeFilter = (filter) => {
-    let search = "";
+  const removeSearchParam = (searchParamToRemove) => {
+    searchParams.delete(searchParamToRemove);
+    navigate(`/search?${searchParams.toString()}`);
+  };
 
-    Object.entries(sp).forEach(([key, value], i) => {
-      if (key != filter) {
-        if (i > 0) search += "&";
-        search += `${key}=${value}`;
-      }
-    });
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const minPrice = e.target[0].value;
+    const maxPrice = e.target[1].value;
 
-    navigate(`/search?${search}`);
+    if (minPrice && maxPrice && Number(minPrice) > Number(maxPrice)) {
+      alert("El precio mínimo debe ser menor o igual al precio máximo.");
+      return;
+    }
+
+    const prices = [];
+    if (minPrice) prices.push(["pl", minPrice]);
+    if (maxPrice) prices.push(["ph", maxPrice]);
+
+    addSearchParam(prices);
   };
 
   return (
     <div className="flex flex-col gap-5 w-3/12 p-1 m-1 rounded bg-gray-100">
       <div className="flex gap-1">
-        {Object.entries(sp).map(([key, value], i) => {
+        {Array.from(searchParams).map(([key, value], i) => {
           if (key == "p") return;
           return (
             <div
@@ -44,7 +46,7 @@ const Filter = ({ sp, filters }) => {
               <button
                 className="size-3 cursor-pointer"
                 onClick={() => {
-                  removeFilter(key);
+                  removeSearchParam(key);
                 }}
                 key={i}
               >
@@ -54,7 +56,7 @@ const Filter = ({ sp, filters }) => {
           );
         })}
       </div>
-      {sp.d == undefined && filters.d != null ? (
+      {searchParams.get("d") == undefined && filters.d != null ? (
         <div className="p-1">
           <p className="font-semibold">Departamento:</p>
           <div className="flex flex-col items-start gap-1 p-1">
@@ -63,7 +65,7 @@ const Filter = ({ sp, filters }) => {
                 <button
                   className="text-sm hover:underline hover:cursor-pointer"
                   onClick={() => {
-                    addFilter("d", d);
+                    addSearchParam([["d", d]]);
                   }}
                   key={i}
                 >
@@ -74,7 +76,7 @@ const Filter = ({ sp, filters }) => {
           </div>
         </div>
       ) : null}
-      {sp.c == undefined && filters.c != null ? (
+      {searchParams.get("c") == undefined && filters.c != null ? (
         <div className="p-1">
           <p className="font-semibold">Condicion:</p>
           <div className="flex flex-col items-start gap-1 p-1">
@@ -83,7 +85,7 @@ const Filter = ({ sp, filters }) => {
                 <button
                   className="text-sm hover:underline hover:cursor-pointer"
                   onClick={() => {
-                    addFilter("c", c);
+                    addSearchParam([["c", c]]);
                   }}
                   key={i}
                 >
@@ -95,15 +97,15 @@ const Filter = ({ sp, filters }) => {
         </div>
       ) : null}
       <div className="p-1">
-        <p className="text-xs">Bajo mantenimiento</p>
         <p className="font-semibold">Precio:</p>
-        <div className="flex gap-2 p-1">
+        <form className="flex items-end gap-2 p-1" onSubmit={submitHandler}>
           <div className="flex flex-col items-center">
             <p className="text-sm">Minimo</p>
             <input
               type="text"
               className="w-full bg-white"
-              placeholder={`$${filters.ph}`}
+              defaultValue={searchParams.get("pl") && ""}
+              placeholder={`$${filters.pl}`}
             />
           </div>
           <div className="flex flex-col items-center">
@@ -111,10 +113,16 @@ const Filter = ({ sp, filters }) => {
             <input
               type="text"
               className="w-full bg-white"
-              placeholder={`$${filters.pl}`}
+              defaultValue={searchParams.get("ph") && ""}
+              placeholder={`$${filters.ph}`}
             />
           </div>
-        </div>
+          <button className="size-max p-1 rounded-full bg-white hover:cursor-pointer">
+            <svg fill="currentColor" className="size-4" viewBox="0 0 16 16">
+              <path d="M6 12.796V3.204L11.481 8zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753" />
+            </svg>
+          </button>
+        </form>
       </div>
     </div>
   );
