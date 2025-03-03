@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
+// TODO Cambiar edad por fecha de nacimiento
 const PersonalInfo = ({ handlingUserInfo }) => {
   const navigate = useNavigate();
 

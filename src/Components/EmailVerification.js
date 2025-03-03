@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
+//FIXME Validar si el correo ya esta associado con otro usuario
 const EmailVerification = ({ handlingUserInfo }) => {
   const navigate = useNavigate();
 
